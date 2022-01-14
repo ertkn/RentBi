@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 const hintTextStyle = TextStyle(
   color: Colors.white,
@@ -15,6 +14,14 @@ const subtleStyle = TextStyle(
 
 const labelStyle = TextStyle(
   color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontFamily: 'OpenSans',
+);
+
+const buttonTextStyle = TextStyle(
+  color: Color(0xFF527DAA),
+  letterSpacing: 1.5,
+  fontSize: 18.0,
   fontWeight: FontWeight.bold,
   fontFamily: 'OpenSans',
 );

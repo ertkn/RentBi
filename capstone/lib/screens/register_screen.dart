@@ -1,7 +1,9 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:capstone/screens/home_screen.dart';
 import 'package:capstone/utilities/spacing.dart';
-import 'package:capstone/utilities/text_fields.dart';
+import 'package:capstone/widgets/emailTF.dart';
+import 'package:capstone/widgets/loginBTN.dart';
+import 'package:capstone/widgets/passwordTF.dart';
 import 'package:capstone/utilities/utility_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +15,18 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+
+  final formKey = GlobalKey<FormState>();
+  final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,79 +60,59 @@ class _SignupScreenState extends State<SignupScreen> {
                 vertical: double.infinity,
               ),*/
 
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                padding: const EdgeInsets.fromLTRB(40, 50, 40, 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildBackButton(),
-                    verticalSpaceSmall,
-                    const Text(
-                      'Create Account',
-                      // textAlign: TextAlign.right,
-                      style: subtleStyle,
-                    ),
-                    verticalSpaceSmall,
-                    SizedBox(
-                      width: screenWidthPercentage(context, percentage: 0.7),
-                      child: Text(
-                        'Enter your name, email and password for sign up',
+              child: Form(
+                key: formKey,
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  padding: const EdgeInsets.fromLTRB(40, 50, 40, 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // _buildBackButton(),
+                      backAndClose(),
+                      verticalSpaceSmall,
+                      const Text(
+                        'Create Account',
                         // textAlign: TextAlign.right,
-                        style: hintTextStyle.copyWith(
-                          color: Color(0xBE244D80),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
+                        style: subtleStyle,
+                      ),
+                      verticalSpaceTiny,
+                      SizedBox(
+                        width: screenWidthPercentage(context, percentage: 0.7),
+                        child: Text(
+                          'Enter your name, email and password for sign up',
+                          // textAlign: TextAlign.right,
+                          style: hintTextStyle.copyWith(
+                            color: Color(0xBE244D80),
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                    ),
-                    verticalSpaceRegular,
-                    // _buildFirstNameTF(),
-                    BuildTextField(
-                      labelText: 'First Name',
-                      textInputType: TextInputType.name,
-                      iconType: Icons.account_circle_rounded,
-                      hintText: 'Enter your First Name',
-                      obscure: false,
-                      // hintText: 'Enter your Email',
-                    ),
-                    verticalSpaceSmall,
-                    BuildTextField(
-                      labelText: 'Last Name',
-                      textInputType: TextInputType.name,
-                      iconType: Icons.account_circle_rounded,
-                      hintText: 'Enter your Last Name',
-                      obscure: false,
-                      // hintText: 'Enter your Email',
-                    ),
-                    // _buildLastTF(),
-                    verticalSpaceSmall,
-                    // _buildPasswordTF(),
-                    BuildTextField(
-                      labelText: 'Password',
-                      textInputType: TextInputType.visiblePassword,
-                      iconType: Icons.lock,
-                      hintText: 'Enter your Password',
-                      obscure: true,
-                      // hintText: 'Enter your Email',
-                    ),
-                    verticalSpaceSmall,
-                    // _buildEmailTF(),
-                    BuildTextField(
-                      labelText: 'Email',
-                      textInputType: TextInputType.emailAddress,
-                      iconType: Icons.account_circle_rounded,
-                      hintText: 'Enter your Email',
-                      obscure: false,
-                      // hintText: 'Enter your Email',
-                    ),
-                    verticalSpaceRegular,
-                    _buildLoginBtn(),
-                  ],
+                      verticalSpaceRegular,
+                      _buildFirstNameTF(),
+/*                    BuildTextField(
+                        labelText: 'First Name',
+                        textInputType: TextInputType.name,
+                        iconType: Icons.account_circle_rounded,
+                        hintText: 'Enter your First Name',
+                        obscure: false,
+                        // hintText: 'Enter your Email',
+                      ),*/
+                      verticalSpaceRegular,
+                      _buildLastTF(),
+                      verticalSpaceRegular,
+                      PasswordTextField(controller: passwordController,),
+                      // verticalSpaceSmall,
+                      EmailTextField(controller: emailController),
+                      verticalSpaceRegular,
+                      _buildLoginBtn(),
+                    ],
+                  ),
                 ),
               ),
             ),
-            _closeButton(),
+            // _closeButton(),
           ],
         ),
       ),
@@ -197,38 +191,12 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildEmailTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Email',
-          style: labelStyle,
-        ),
-        verticalSpaceTiny,
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: boxDecorationStyle,
-          height: 50.0,
-          child: const TextField(
-            keyboardType: TextInputType.name,
-/*            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),*/
-            style: hintTextStyle,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              // contentPadding: EdgeInsets.only(top: 10.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.white,
-              ),
-              hintText: 'Enter your Email',
-              hintStyle: hintTextStyle,
-            ),
-          ),
-        ),
+  Widget backAndClose(){
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        _buildBackButton(),
+        _closeButton(),
       ],
     );
   }
@@ -245,7 +213,87 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  Widget _buildPasswordTF() {
+  Widget _closeButton(){
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      },
+      style: ElevatedButton.styleFrom(
+        elevation: 0.0,
+        //padding: const EdgeInsets.all(15.0),
+        primary: Colors.transparent,
+      ),
+      child: const Icon(
+        Icons.close_outlined,
+        size: 32,
+        color: Color(0xBE385C89),
+        //semanticLabel: 'go without sign',
+      ),
+    );
+  }
+
+
+  Widget _buildLoginBtn() {
+    return ButtonWidget(
+      buttonText: 'LOGIN',
+      onPressedFunction: validFunction,
+    );
+  }
+
+  void validFunction(){
+    final form = formKey.currentState!;
+
+    if (form.validate()) {
+      // final emailss = emailController.text;
+
+      /*ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text('Your email is $email'),
+        ));*/
+
+    }
+  }
+}
+
+
+/*Widget _buildEmailTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Email',
+          style: labelStyle,
+        ),
+        verticalSpaceTiny,
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: boxDecorationStyle,
+          height: 50.0,
+          child: const TextField(
+            keyboardType: TextInputType.emailAddress,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            style: hintTextStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              // contentPadding: EdgeInsets.only(top: 10.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your Email',
+              hintStyle: hintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }*/
+
+/*Widget _buildPasswordTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -259,11 +307,12 @@ class _SignupScreenState extends State<SignupScreen> {
           decoration: boxDecorationStyle,
           height: 50.0,
           child: const TextField(
+            keyboardType: TextInputType.visiblePassword,
             obscureText: true,
-/*            style: TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
-            ),*/
+            ),
             style: hintTextStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -279,9 +328,9 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ],
     );
-  }
+  }*/
 
-  Widget _closeButton() {
+/*Widget _closeButton() {
     return Positioned(
       top: 45.0,
       right: 25,
@@ -304,27 +353,4 @@ class _SignupScreenState extends State<SignupScreen> {
         ),
       ),
     );
-  }
-
-  Widget _buildLoginBtn() {
-    return Container(
-      // padding: const EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: ElevatedButton(
-        style: elvButtonStyle,
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen())),
-        // onPressed: () => print('Login Button Pressed'),
-        child: const Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
-    );
-  }
-}
+  }*/

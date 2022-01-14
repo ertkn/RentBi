@@ -1,6 +1,8 @@
 import 'package:capstone/screens/home_screen.dart';
 import 'package:capstone/screens/register_screen.dart';
-import 'package:capstone/utilities/text_fields.dart';
+import 'package:capstone/widgets/emailTF.dart';
+import 'package:capstone/widgets/loginBTN.dart';
+import 'package:capstone/widgets/passwordTF.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,16 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool? _rememberMe = false;
+  final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    emailController.dispose();
+    super.dispose();
+  }
 
   // final ButtonStyle _elvButtonStyle = elvButtonStyle;
   // final ButtonStyle _txtButtonStyle = txtButtonStyle;
@@ -68,79 +80,44 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Container(
                 height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0,
-                    vertical: 145.0,
-                  ),
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      const Text(
-                        'Sign In',
-                        style: subtleStyle,
-                      ),
-                      verticalSpaceSmall,
-                      // const SizedBox(height: 10.0),
-                      BuildTextField(
-                        labelText: 'Email',
-                        textInputType: TextInputType.emailAddress,
-                        iconType: Icons.email,
-                        hintText: 'Enter your Email',
-                        obscure: false,
-                        // hintText: 'Enter your Email',
-                      ),
-                      // const SizedBox(height: 10.0,),
-                      verticalSpaceSmall,
-                      // _buildPasswordTF(),
-                      BuildTextField(
-                        labelText: 'Password',
-                        textInputType: TextInputType.visiblePassword,
-                        iconType: Icons.lock,
-                        hintText: 'Enter your Password',
-                        obscure: true,
-                        // hintText: 'Enter your Email',
-                      ),
-                      Row(
-                          //height: 25.0,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //crossAxisAlignment: CrossAxisAlignment.end,
-                          //padding: EdgeInsets.symmetric(horizontal: 0),
-                          children: <Widget>[
-                            _buildRememberMeCheckbox(),
-                            _buildForgotPasswordBtn(),
-                          ]),
-                      _buildLoginBtn(),
-/*                    _buildSignInWithText(),
-                      _buildSocialBtnRow(),*/
-                      _buildSignupBtn(),
-                    ],
+                child: Form(
+                  key: formKey,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 40.0,
+                      vertical: 145.0,
+                    ),
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text(
+                          'Sign In',
+                          style: subtleStyle,
+                        ),
+                        verticalSpaceSmall,
+                        EmailTextField(controller: emailController),
+                        verticalSpaceSmall,
+                        PasswordTextField(controller: passwordController),
+                        // verticalSpaceTiny,
+                        Row(
+                            //height: 25.0,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //crossAxisAlignment: CrossAxisAlignment.end,
+                            //padding: EdgeInsets.symmetric(horizontal: 0),
+                            children: <Widget>[
+                              _buildRememberMeCheckbox(),
+                              _buildForgotPasswordBtn(),
+                            ]),
+                        _buildLoginBtn(),
+                        verticalSpaceRegular,
+                        _buildSignupBtn(),
+                      ],
+                    ),
                   ),
                 ),
               ),
-              Positioned(
-                top: 120.0,
-                right: 20,
-                // height: 25.0,
-                // width: 25.0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-                  },
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0.0,
-                    //padding: const EdgeInsets.all(15.0),
-                    primary: Colors.transparent,
-                  ),
-                  child: const Icon(
-                    Icons.close_outlined,
-                    size: 32,
-                    color: Color(0xBE385C89),
-                    //semanticLabel: 'go without sign',
-                  ),
-                ),
-              )
+              _closeButton(),
             ],
           ),
         ),
@@ -148,12 +125,37 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-/*  Widget _buildEmailTF(String labelText) {
+  Widget _closeButton(){
+    return Positioned(
+      top: 120.0,
+      right: 20,
+      // height: 25.0,
+      // width: 25.0,
+      child: ElevatedButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+        },
+        style: ElevatedButton.styleFrom(
+          elevation: 0.0,
+          //padding: const EdgeInsets.all(15.0),
+          primary: Colors.transparent,
+        ),
+        child: const Icon(
+          Icons.close_outlined,
+          size: 32,
+          color: Color(0xBE385C89),
+          //semanticLabel: 'go without sign',
+        ),
+      ),
+    );
+  }
+
+  /*Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(
-          '${labelText}',
+        const Text(
+          'Email',
           style: labelStyle,
         ),
         // const SizedBox(height: 5.0),
@@ -164,10 +166,10 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 50.0,
           child: const TextField(
             keyboardType: TextInputType.emailAddress,
-*/ /*            style: TextStyle(
+             style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
-            ),*/ /*
+            ),
             style: hintTextStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -185,7 +187,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }*/
 
-  Widget _buildPasswordTF() {
+  /*Widget _buildPasswordTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -200,10 +202,10 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 50.0,
           child: const TextField(
             obscureText: true,
-/*            style: TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontFamily: 'OpenSans',
-            ),*/
+            ),
             style: hintTextStyle,
             decoration: InputDecoration(
               border: InputBorder.none,
@@ -219,7 +221,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ],
     );
-  }
+  }*/
 
   Widget _buildForgotPasswordBtn() {
     return Container(
@@ -266,92 +268,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginBtn() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 25.0),
-      width: double.infinity,
-      child: ElevatedButton(
-        style: elvButtonStyle,
-        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen())),
-        // onPressed: () => print('Login Button Pressed'),
-        child: const Text(
-          'LOGIN',
-          style: TextStyle(
-            color: Color(0xFF527DAA),
-            letterSpacing: 1.5,
-            fontSize: 18.0,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'OpenSans',
-          ),
-        ),
-      ),
+    return ButtonWidget(
+      buttonText: 'LOGIN',
+      onPressedFunction: validFunction,
     );
   }
 
-  Widget _buildSignInWithText() {
-    return Column(
-      children: const <Widget>[
-        Text(
-          '- OR -',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        // SizedBox(height: 20.0),
-        verticalSpaceLarge,
-        Text(
-          'Sign in with',
-          style: labelStyle,
-        ),
-      ],
-    );
-  }
+  void validFunction(){
+    final form = formKey.currentState!;
 
-  Widget _buildSocialBtn(Function _onTap, AssetImage logo) {
-    return GestureDetector(
-      onTap: () => _onTap,
-      child: Container(
-        height: 60.0,
-        width: 60.0,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black26,
-              offset: Offset(0, 2),
-              blurRadius: 6.0,
-            ),
-          ],
-          image: DecorationImage(
-            image: logo,
-          ),
-        ),
-      ),
-    );
-  }
+    if (form.validate()) {
+      // final email = emailController.selection.;
 
-  Widget _buildSocialBtnRow() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          _buildSocialBtn(
-            () => print('Login with Facebook'),
-            const AssetImage(
-              'assets/facebook.jpg',
-            ),
-          ),
-          _buildSocialBtn(
-            () => print('Login with Google'),
-            const AssetImage(
-              'assets/google.jpg',
-            ),
-          ),
-        ],
-      ),
-    );
+      /*ScaffoldMessenger.of(context)
+        ..removeCurrentSnackBar()
+        ..showSnackBar(SnackBar(
+          content: Text('Your email is $email'),
+        ));*/
+    }
   }
 
   Widget _buildSignupBtn() {
@@ -384,7 +318,97 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
+/*Widget _buildLoginBtn() {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: elvButtonStyle,
+        onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen())),
+        // onPressed: () => print('Login Button Pressed'),
+        child: const Text(
+          'LOGIN',
+          style: TextStyle(
+            color: Color(0xFF527DAA),
+            letterSpacing: 1.5,
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'OpenSans',
+          ),
+        ),
+      ),
+    );
+  }*/
+
+/*Widget _buildSignInWithText() {
+    return Column(
+      children: const <Widget>[
+        Text(
+          '- OR -',
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        // SizedBox(height: 20.0),
+        verticalSpaceLarge,
+        Text(
+          'Sign in with',
+          style: labelStyle,
+        ),
+      ],
+    );
+  }*/
+
+/*Widget _buildSocialBtn(Function _onTap, AssetImage logo) {
+    return GestureDetector(
+      onTap: () => _onTap,
+      child: Container(
+        height: 60.0,
+        width: 60.0,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              offset: Offset(0, 2),
+              blurRadius: 6.0,
+            ),
+          ],
+          image: DecorationImage(
+            image: logo,
+          ),
+        ),
+      ),
+    );
+  }*/
+
+/*Widget _buildSocialBtnRow() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildSocialBtn(
+            () => print('Login with Facebook'),
+            const AssetImage(
+              'assets/facebook.jpg',
+            ),
+          ),
+          _buildSocialBtn(
+            () => print('Login with Google'),
+            const AssetImage(
+              'assets/google.jpg',
+            ),
+          ),
+        ],
+      ),
+    );
+  }*/
+
 /*
+
 
 child: TextButton(
                   onPressed: () => print('pressed'),
@@ -430,4 +454,27 @@ GestureDetector(
               onTap: (){
                 Navigator.push(context, MaterialPageRoute(
                     builder: (context) => const SignupScreen()),);
-              },*/
+              },
+
+Positioned(
+                top: 120.0,
+                right: 20,
+                // height: 25.0,
+                // width: 25.0,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0.0,
+                    //padding: const EdgeInsets.all(15.0),
+                    primary: Colors.transparent,
+                  ),
+                  child: const Icon(
+                    Icons.close_outlined,
+                    size: 32,
+                    color: Color(0xBE385C89),
+                    //semanticLabel: 'go without sign',
+                  ),
+                ),
+              )*/
