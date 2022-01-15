@@ -1,5 +1,3 @@
-// import 'package:flutter/cupertino.dart';
-import 'package:capstone/screens/home_screen.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/widgets/emailTF.dart';
 import 'package:capstone/widgets/loginBTN.dart';
@@ -30,6 +28,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: const NavigationDrawer(),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
@@ -216,7 +215,8 @@ class _SignupScreenState extends State<SignupScreen> {
   Widget _closeButton(){
     return ElevatedButton(
       onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.pushNamed(context, '/home');
       },
       style: ElevatedButton.styleFrom(
         elevation: 0.0,

@@ -5,8 +5,6 @@ import 'package:capstone/widgets/loginBTN.dart';
 import 'package:capstone/widgets/passwordTF.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';
-
-//import 'package:flutter/services.dart';
 import 'package:capstone/utilities/utility_constants.dart';
 import 'package:flutter/services.dart';
 
@@ -36,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // drawer: const NavigationDrawer(),
       /*appBar: AppBar(
         toolbarHeight: 100,
         backgroundColor: Colors.transparent,
@@ -55,19 +54,14 @@ class _LoginScreenState extends State<LoginScreen> {
           onTap: () => FocusScope.of(context).unfocus(),
           child: Stack(
             children: <Widget>[
-              Container(
+           /*   Container(
                 height: double.infinity,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    /*colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
-                    ],*/
+
                     colors: [
                       Color(0xFFB6CFEC),
                       Color(0xFF8BAACE),
@@ -77,9 +71,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     stops: [0.1, 0.4, 0.7, 0.9],
                   ),
                 ),
-              ),
+              ),*/
               Container(
                 height: double.infinity,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFB6CFEC),
+                      Color(0xFF8BAACE),
+                      Color(0xFF6788AC),
+                      Color(0xFF37485C),
+                    ],
+                    stops: [0.1, 0.4, 0.7, 0.9],
+                  ),
+                ),
                 child: Form(
                   key: formKey,
                   child: SingleChildScrollView(
@@ -150,6 +158,13 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+
+  /*colors: [
+  Color(0xFF73AEF5),
+  Color(0xFF61A4F1),
+  Color(0xFF478DE0),
+  Color(0xFF398AE5),
+  ],*/
   /*Widget _buildEmailTF() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

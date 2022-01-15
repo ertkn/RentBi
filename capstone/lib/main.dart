@@ -1,5 +1,6 @@
 import 'package:capstone/screens/home_screen.dart';
 import 'package:capstone/screens/login_screen.dart';
+import 'package:capstone/screens/profile_screen.dart';
 import 'package:capstone/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.indigo,
       ),
       //home: const MyHomePage(title: 'RentBi'),
-      home: LoginScreen(),
+      // home: LoginScreen(),
+      initialRoute: '/home',
+      routes: {
+        '/' : (context) => LoginScreen(),
+        '/home' : (context) => HomeScreen(),
+        '/signup' : (contex) => SignupScreen(),
+        '/profile' : (contex) => ProfileScreen(),
+        // '/login' : (contex) => LoginScreen(),
+      },
       // home: SignupScreen(),
       // home: HomeScreen(),
     );

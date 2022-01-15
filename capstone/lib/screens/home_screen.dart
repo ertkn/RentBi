@@ -38,6 +38,7 @@ class SecondScreen extends StatelessWidget {
 }
 */
 
+import 'package:capstone/widgets/NavigationDrawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const NavigationDrawer(),
+
       // extendBodyBehindAppBar: true,
       body: SafeArea(
         child: GestureDetector(
@@ -172,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
         Icons.arrow_back,
         color: Colors.black54,
       ),
-      constraints: BoxConstraints(minHeight: 0.0, minWidth: 0.0),
+      constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),
       tooltip: 'go back',
       onPressed: () => Navigator.pop(context),
     );
@@ -186,10 +189,10 @@ class _HomeScreenState extends State<HomeScreen> {
       // color: Colors.black26,
       // padding: EdgeInsets.fromLTRB(7.5, 7.5, 2.5, 0),
       margin: const EdgeInsets.fromLTRB(5, 15, 0, 5),
-
-
       child: IconButton(
-        onPressed: () => print('pfp icon'),
+        // onPressed: () => print('pfp icon'),
+        // onPressed: () => Navigator.pop(context),
+        onPressed: () => Navigator.pushNamed(context, '/profile'),
         icon: const FittedBox(
           fit: BoxFit.none,
           child: CircleAvatar(
