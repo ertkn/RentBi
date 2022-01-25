@@ -1,0 +1,15 @@
+import 'package:capstone/utilities/constants.dart';
+import 'package:flutter/material.dart';
+
+class TextFieldContainer extends StatelessWidget {
+  const TextFieldContainer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      decoration: boxDecorationStyle,
+      height: 50.0,
+    );
+  }
+}

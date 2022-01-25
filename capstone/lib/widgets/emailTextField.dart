@@ -1,7 +1,9 @@
+import 'dart:math';
+
 import 'package:capstone/utilities/spacing.dart';
-import 'package:capstone/utilities/utility_constants.dart';
+import 'package:capstone/utilities/constants.dart';
+import 'package:capstone/widgets/text_field_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:email_validator/email_validator.dart';
 
 class EmailTextField extends StatefulWidget {
@@ -14,6 +16,7 @@ class EmailTextField extends StatefulWidget {
 }
 
 class _EmailTextFieldState extends State<EmailTextField> {
+  int random = Random().nextInt(100 - 55) * 3;
   @override
   void initState() {
     super.initState();
@@ -38,33 +41,44 @@ class _EmailTextFieldState extends State<EmailTextField> {
           'Email',
           style: labelStyle,
         ),
-        // const SizedBox(height: 5.0),
         verticalSpaceTiny,
-        /*Container(
-          alignment: Alignment.centerLeft,
-          decoration: boxDecorationStyle,
-          height: 50.0,
-
-          child: buildTextFormField(),
-        ),*/
         Stack(
           children: [
-            Container(
-              // alignment: Alignment.centerLeft,
-              decoration: boxDecorationStyle,
-              height: 50.0,
-              // child: buildTextFormField(),
-            ),
+            const TextFieldContainer(),
             TextFormField(
               cursorColor: Colors.white,
-              controller: widget.controller,
+              style: fieldTextStyle,
               keyboardType: TextInputType.emailAddress,
-              style: hintTextStyle,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+
+              controller: widget.controller,
+
+              onChanged: (value) {
+/*                if(emailValidatorRegExp.hasMatch(value)){
+                  setState(() {
+                    random = Random().nextInt(100-15);
+                  });
+                  print('onChange'+ '---' + '$random');
+                }*/
+                if(EmailValidator.validate(value)){
+                  setState(() {
+                    random = Random().nextInt(100-15);
+                  });
+                  print('onChange'+ '---' + '$random');
+                }
+              },
+
+              // onSaved: (newValue) => myUser.email = email,
+              onSaved: (newValue) {
+                print('onSaved');
+              },
               validator: (email) =>
                   email != null && !EmailValidator.validate(email) ? 'Enter a valid email' : null,
+
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
-                hintStyle: hintTextStyle,
+                hintStyle: fieldTextStyle,
                 border: InputBorder.none,
                 prefixIcon: const Icon(
                   Icons.email,

@@ -1,12 +1,6 @@
-import 'package:capstone/screens/home_screen.dart';
-import 'package:capstone/screens/register_screen.dart';
-import 'package:capstone/widgets/emailTF.dart';
-import 'package:capstone/widgets/loginBTN.dart';
-import 'package:capstone/widgets/passwordTF.dart';
+import 'package:capstone/screens/sign_in/widgets/body.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';
-import 'package:capstone/utilities/utility_constants.dart';
-import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -16,18 +10,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool? _rememberMe = false;
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    passwordController.dispose();
-    emailController.dispose();
-    super.dispose();
-  }
-
   // final ButtonStyle _elvButtonStyle = elvButtonStyle;
   // final ButtonStyle _txtButtonStyle = txtButtonStyle;
 
@@ -35,105 +17,29 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       // drawer: const NavigationDrawer(),
-      /*appBar: AppBar(
-        toolbarHeight: 100,
-        backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFB6CFEC),
         elevation: 0.0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 27.0,top: 50.0,bottom: 0),
-          child: IconButton(
-            icon:  Icon(Icons.arrow_back,size: 30.0,),
-            onPressed: () {},
-          ),
-        ),
-      ),*/
-      //extendBodyBehindAppBar: true,
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-           /*   Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-
-                    colors: [
-                      Color(0xFFB6CFEC),
-                      Color(0xFF8BAACE),
-                      Color(0xFF6788AC),
-                      Color(0xFF37485C),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
+        actions: [
+          IconButton(
+              padding: EdgeInsets.symmetric(
+                  horizontal: screenWidthPercentage(
+                    context,
+                    percentage: 0.1,
                   ),
-                ),
-              ),*/
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFFB6CFEC),
-                      Color(0xFF8BAACE),
-                      Color(0xFF6788AC),
-                      Color(0xFF37485C),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                  ),
-                ),
-                child: Form(
-                  key: formKey,
-                  child: SingleChildScrollView(
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 40.0,
-                      vertical: 145.0,
-                    ),
-                    child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text(
-                          'Sign In',
-                          style: subtleStyle,
-                        ),
-                        verticalSpaceSmall,
-                        EmailTextField(controller: emailController),
-                        verticalSpaceSmall,
-                        PasswordTextField(controller: passwordController),
-                        // verticalSpaceTiny,
-                        Row(
-                            //height: 25.0,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //crossAxisAlignment: CrossAxisAlignment.end,
-                            //padding: EdgeInsets.symmetric(horizontal: 0),
-                            children: <Widget>[
-                              _buildRememberMeCheckbox(),
-                              _buildForgotPasswordBtn(),
-                            ]),
-                        _buildLoginBtn(),
-                        verticalSpaceRegular,
-                        _buildSignupBtn(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              _closeButton(),
-            ],
-          ),
-        ),
+                  vertical: 0),
+              onPressed: () {
+                Navigator.pushNamed(context, '/home');
+              },
+              icon: const Icon(Icons.arrow_forward_ios_outlined))
+        ],
       ),
+      //extendBodyBehindAppBar: true,
+      body: const Body(),
     );
   }
 
-  Widget _closeButton(){
+/*  Widget _closeButton() {
     return Positioned(
       top: 120.0,
       right: 20,
@@ -157,86 +63,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
-
-  /*colors: [
-  Color(0xFF73AEF5),
-  Color(0xFF61A4F1),
-  Color(0xFF478DE0),
-  Color(0xFF398AE5),
-  ],*/
-  /*Widget _buildEmailTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Email',
-          style: labelStyle,
-        ),
-        // const SizedBox(height: 5.0),
-        verticalSpaceTiny,
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: boxDecorationStyle,
-          height: 50.0,
-          child: const TextField(
-            keyboardType: TextInputType.emailAddress,
-             style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            style: hintTextStyle,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              // contentPadding: EdgeInsets.only(top: 10.0),
-              prefixIcon: Icon(
-                Icons.email,
-                color: Colors.white,
-              ),
-              hintText: 'Enter your Email',
-              hintStyle: hintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }*/
-
-  /*Widget _buildPasswordTF() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Text(
-          'Password',
-          style: labelStyle,
-        ),
-        verticalSpaceTiny,
-        Container(
-          alignment: Alignment.centerLeft,
-          decoration: boxDecorationStyle,
-          height: 50.0,
-          child: const TextField(
-            obscureText: true,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: 'OpenSans',
-            ),
-            style: hintTextStyle,
-            decoration: InputDecoration(
-              border: InputBorder.none,
-              //contentPadding: EdgeInsets.only(top: 14.0),
-              prefixIcon: Icon(
-                Icons.lock,
-                color: Colors.white,
-              ),
-              hintText: 'Enter your Password',
-              hintStyle: hintTextStyle,
-            ),
-          ),
-        ),
-      ],
-    );
-  }*/
 
   Widget _buildForgotPasswordBtn() {
     return Container(
@@ -283,29 +109,29 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginBtn() {
-    return ButtonWidget(
+    return LoginButton(
       buttonText: 'LOGIN',
       onPressedFunction: validFunction,
     );
   }
 
-  void validFunction(){
+  void validFunction() {
     final form = formKey.currentState!;
 
     if (form.validate()) {
       // final email = emailController.selection.;
 
-      /*ScaffoldMessenger.of(context)
+      ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(
           content: Text('Your email is $email'),
-        ));*/
+        ));
     }
   }
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SignupScreen())),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen())),
       // onTap: () => print('routed to Sign-up page'),
       child: RichText(
         text: const TextSpan(
@@ -330,8 +156,112 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-  }
+  }*/
 }
+/*leading: Padding(
+          padding: EdgeInsets.only(
+            left: screenWidthPercentage(context,percentage: 0.05)
+          ),
+          child: IconButton(
+            icon: const Icon(Icons.arrow_back,size: 30.0,),
+            onPressed: () {},
+          ),
+        ),*/
+/*   Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+
+                      colors: [
+                        Color(0xFFB6CFEC),
+                        Color(0xFF8BAACE),
+                        Color(0xFF6788AC),
+                        Color(0xFF37485C),
+                      ],
+                      stops: [0.1, 0.4, 0.7, 0.9],
+                    ),
+                  ),
+                ),*/
+/*colors: [
+  Color(0xFF73AEF5),
+  Color(0xFF61A4F1),
+  Color(0xFF478DE0),
+  Color(0xFF398AE5),
+  ],*/
+/*Widget _buildEmailTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Email',
+          style: labelStyle,
+        ),
+        // const SizedBox(height: 5.0),
+        verticalSpaceTiny,
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: boxDecorationStyle,
+          height: 50.0,
+          child: const TextField(
+            keyboardType: TextInputType.emailAddress,
+             style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            style: hintTextStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              // contentPadding: EdgeInsets.only(top: 10.0),
+              prefixIcon: Icon(
+                Icons.email,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your Email',
+              hintStyle: hintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }*/
+/*Widget _buildPasswordTF() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Password',
+          style: labelStyle,
+        ),
+        verticalSpaceTiny,
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: boxDecorationStyle,
+          height: 50.0,
+          child: const TextField(
+            obscureText: true,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: 'OpenSans',
+            ),
+            style: hintTextStyle,
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              //contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.white,
+              ),
+              hintText: 'Enter your Password',
+              hintStyle: hintTextStyle,
+            ),
+          ),
+        ),
+      ],
+    );
+  }*/
 
 /*Widget _buildLoginBtn() {
     return Container(

@@ -1,12 +1,12 @@
 import 'package:capstone/utilities/spacing.dart';
-import 'package:capstone/utilities/utility_constants.dart';
+import 'package:capstone/utilities/constants.dart';
+import 'package:capstone/widgets/text_field_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class PasswordTextField extends StatefulWidget {
   final TextEditingController controller;
 
-  const PasswordTextField({Key? key, required this.controller}) : super(key: key);
+  PasswordTextField({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<PasswordTextField> createState() => _PasswordTextFieldState();
@@ -14,6 +14,7 @@ class PasswordTextField extends StatefulWidget {
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
   bool isHidden = true;
+  String password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,6 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
           'Password',
           style: labelStyle,
         ),
-        // const SizedBox(height: 5.0),
         verticalSpaceTiny,
         /*Container(
           alignment: Alignment.centerLeft,
@@ -70,25 +70,29 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
         ),*/
         Stack(
           children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              decoration: boxDecorationStyle,
-              height: 50.0,
-              // child: buildTextFormField(),
-            ),
+            const TextFieldContainer(),
             TextFormField(
+              style: fieldTextStyle,
+              cursorColor: Colors.white,
+              obscureText: isHidden,
+              keyboardType: TextInputType.visiblePassword,
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+
+              onSaved: (newValue) => print(newValue),
+
+              onChanged: (value) => setState(() => password = value),
               // autofillHints: const [AutofillHints.password],
               // onEditingComplete: () => TextInput.finishAutofillContext(),
-              controller: widget.controller,
-              maxLength: 24,
-              keyboardType: TextInputType.visiblePassword,
-              obscureText: isHidden,
-              style: hintTextStyle,
+              // controller: widget.controller,
+              // maxLength: 24,
+
               validator: (password) => password != null && password.length < 5 ? 'Enter min. 5 characters' : null,
 
               decoration: InputDecoration(
+                // floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintText: 'Enter your Password',
-                hintStyle: hintTextStyle,
+                hintStyle: fieldTextStyle,
                 border: InputBorder.none,
                 // contentPadding: EdgeInsets.only(top: 10.0),
                 prefixIcon: const Icon(

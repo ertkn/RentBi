@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 
-const hintTextStyle = TextStyle(
+const kTextColor = Color(0xFF757575);
+const defaultDuration = Duration(milliseconds: 250);
+
+final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+const fieldTextStyle = TextStyle(
   color: Colors.white,
+  fontFamily: 'OpenSans',
+);
+
+const hintTextStyle = TextStyle(
+  color: Colors.black,
   fontFamily: 'OpenSans',
 );
 
@@ -54,6 +64,26 @@ final boxDecorationStyle = BoxDecoration(
   ],
 );
 
+const backgroundDecorationStyle = BoxDecoration(
+  gradient: LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xFFB6CFEC),
+      Color(0xFF8BAACE),
+      Color(0xFF6788AC),
+      Color(0xFF37485C),
+    ],
+    stops: [0.1, 0.4, 0.7, 0.9],
+  ),
+);
+/*
+const textFieldInputDecoration = InputDecoration(
+  border: InputBorder.none,
+  hintStyle: hintTextStyle,
+);
+*/
+
 ButtonStyle elvButtonStyle = ElevatedButton.styleFrom(
   elevation: 5.0,
   padding: const EdgeInsets.all(15.0),
@@ -70,6 +100,53 @@ ButtonStyle txtButtonStyle = TextButton.styleFrom(
   backgroundColor: Colors.transparent,
 //shadowColor:
 );
+
+/*
+final textFieldContainer = Container(
+  alignment: Alignment.centerLeft,
+  decoration: boxDecorationStyle,
+  height: 50.0,
+);
+*/
+
+/*Widget column = Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  children: <Widget>[
+    const Text(
+      'First Name',
+      style: labelStyle,
+    ),
+    verticalSpaceTiny,
+    Stack(
+      children: <Widget>[
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: boxDecorationStyle,
+          height: 50.0,
+        ),
+        TextFormField(
+          cursorColor: Colors.white,
+          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.name,
+          style: hintTextStyle,
+          validator: (value) => value != null && (value.length > 50 || value.isEmpty)
+              ? 'Name length must be between 1-50 characters'
+              : null,
+          decoration: const InputDecoration(
+            border: InputBorder.none,
+            // contentPadding: EdgeInsets.only(top: 10.0),
+            prefixIcon: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+            hintText: 'Enter your Firs Name',
+            hintStyle: hintTextStyle,
+          ),
+        ),
+      ],
+    ),
+  ],
+);*/
 
 /*
 TextField textFieldSample = const TextField(

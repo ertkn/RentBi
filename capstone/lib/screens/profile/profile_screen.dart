@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:capstone/widgets/NavigationDrawer.dart';
+import 'package:capstone/widgets/navigationDrawer.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -20,6 +20,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         elevation: 0,
       ),*/
       drawer: NavigationDrawer(),
+      bottomNavigationBar: NavigationDrawer(),
       body: SafeArea(
         child: Container(
           color: Colors.indigo[200],

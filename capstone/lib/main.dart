@@ -1,7 +1,9 @@
-import 'package:capstone/screens/home_screen.dart';
-import 'package:capstone/screens/login_screen.dart';
-import 'package:capstone/screens/profile_screen.dart';
-import 'package:capstone/screens/register_screen.dart';
+import 'package:capstone/screens/home/home_screen.dart';
+import 'package:capstone/screens/sign_in/sign_in_screen.dart';
+import 'package:capstone/screens/profile/profile_screen.dart';
+import 'package:capstone/screens/sign_up/sign_up_screen.dart';
+import 'package:capstone/screens/sign_up_post/sign_up_post.dart';
+import 'package:capstone/utilities/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,17 +19,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
+/*      theme: ThemeData(
         primarySwatch: Colors.indigo,
-      ),
+      ),*/
       //home: const MyHomePage(title: 'RentBi'),
       // home: LoginScreen(),
+      theme: theme(),
       initialRoute: '/home',
       routes: {
         '/' : (context) => LoginScreen(),
         '/home' : (context) => HomeScreen(),
         '/signup' : (contex) => SignupScreen(),
         '/profile' : (contex) => ProfileScreen(),
+        '/signuppost' : (contex) => SignUpPost(),
+
         // '/login' : (contex) => LoginScreen(),
       },
       // home: SignupScreen(),

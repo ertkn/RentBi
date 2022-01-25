@@ -1,44 +1,4 @@
-/*
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-class HomeScreen extends StatefulWidget {
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    _updateAppbar();
-    super.initState();
-  }
-
-  void _updateAppbar() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        child: RaisedButton(
-            child: Text('Navigate to second screen'),
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext context) => SecondScreen()))
-                .whenComplete(() => Future.delayed(Duration(milliseconds: 500)).then((_) => _updateAppbar()))));
-  }
-}
-
-class SecondScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-    );
-  }
-}
-*/
-
-import 'package:capstone/widgets/NavigationDrawer.dart';
+import 'package:capstone/widgets/navigationDrawer.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -413,3 +373,42 @@ class _HomeScreenState extends State<HomeScreen> {
             // Image.asset('assets/fb.JPG'),
             ),
       ),*/
+/*
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class HomeScreen extends StatefulWidget {
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    _updateAppbar();
+    super.initState();
+  }
+
+  void _updateAppbar() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: RaisedButton(
+            child: Text('Navigate to second screen'),
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (BuildContext context) => SecondScreen()))
+                .whenComplete(() => Future.delayed(Duration(milliseconds: 500)).then((_) => _updateAppbar()))));
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+    );
+  }
+}
+*/

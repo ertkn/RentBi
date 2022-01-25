@@ -1,11 +1,11 @@
-import 'package:capstone/utilities/utility_constants.dart';
+import 'package:capstone/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-class ButtonWidget extends StatelessWidget {
+class LoginButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback onPressedFunction;
 
-  const ButtonWidget({
+  const LoginButton({
     Key? key,
     required this.buttonText,
     required this.onPressedFunction,
