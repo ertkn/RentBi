@@ -3,26 +3,26 @@ class User {
   String? lastName;
   String? email;
   String? password;
+  String imagePath;
 
-/*    final String about;
-    final String address;
-    final String addressDistrict;
-    final String addressCity;
-    final String addressCountry;
-    final String imagePath;
-    final int phoneNumber;*/
+  String? about;
+  String? address;
+  String? addressDistrict;
+  String? addressCity;
+  String? addressCountry;
+  int? phoneNumber;
 
   User({
     this.firstName,
     this.lastName,
     this.email,
     this.password,
-/*     required this.about,
-     required this.address,
-     required this.addressDistrict,
-     required this.addressCity,
-     required this.addressCountry,
-     required this.imagePath,
-     required this.phoneNumber,*/
+    required this.imagePath,
+    this.about,
+    this.address,
+    this.addressDistrict,
+    this.addressCity,
+    this.addressCountry,
+    this.phoneNumber,
   });
 }

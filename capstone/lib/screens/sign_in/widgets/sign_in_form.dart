@@ -97,6 +97,7 @@ class _SignInFormState extends State<SignInForm> {
               onSaved: (newValue) {
                 setState(() {
                   newUser.email = newValue;
+                  UserPreferences.myUser.email = newValue;
                 });
               },
               validator: (email) =>
@@ -196,6 +197,7 @@ class _SignInFormState extends State<SignInForm> {
               onSaved: (newValue) {
                 setState(() {
                   newUser.password = newValue;
+                  UserPreferences.myUser.password = newValue;
                 });
               },
 
@@ -299,11 +301,11 @@ class _SignInFormState extends State<SignInForm> {
       // formKey.currentState!.save();
       form.save();
       // final email = emailController.selection.;
-      print(controller.text + '---' + controller.text + '\n');
-      print('First Name: ' +'${newUser.firstName}' +
-          '\nLast Name: ' +'${newUser.lastName}' +
-          '\nEmail: ' +'${newUser.email}'+
-          '\nPassword: '+'${newUser.password}');
+      // print(controller.text + '---' + controller.text + '\n');
+      print('First Name: ' +'${UserPreferences.myUser.firstName}' +
+          '\nLast Name: ' +'${UserPreferences.myUser.lastName}' +
+          '\nEmail: ' +'${UserPreferences.myUser.email}'+
+          '\nPassword: '+'${UserPreferences.myUser.password}');
 
       Navigator.pushNamed(context, '/home');
       /*ScaffoldMessenger.of(context)

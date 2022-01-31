@@ -1,4 +1,4 @@
-import 'package:capstone/models/user.dart';
+// import 'package:capstone/models/user.dart';
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
@@ -18,9 +18,10 @@ class _SignUpFormState extends State<SignUpForm> {
   bool isHidden = true;
   final formKey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final passwordController = TextEditingController();
   final emailController = TextEditingController();
-  User newUser = UserPreferences.myUser;
+  // User newUser = UserPreferences.myUser;
 
   @override
   void initState() {
@@ -87,7 +88,7 @@ class _SignUpFormState extends State<SignUpForm> {
               onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
               onSaved: (newValue) {
                 setState(() {
-                  newUser.password = newValue;
+                  UserPreferences.myUser.password = newValue;
                 });
               },
               validator: (password) => password != null && password.length < 5 ? 'Enter min. 5 characters' : null,
@@ -117,7 +118,7 @@ class _SignUpFormState extends State<SignUpForm> {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }
@@ -161,7 +162,7 @@ class _SignUpFormState extends State<SignUpForm> {
               // onSaved: (newValue) => myUser.email = email,
               onSaved: (newValue) {
                 setState(() {
-                  newUser.email = newValue;
+                  UserPreferences.myUser.email = newValue;
                 });
               },
               validator: (email) =>
@@ -224,7 +225,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
               onSaved: (newValue) {
                 setState(() {
-                  newUser.firstName = newValue;
+                  UserPreferences.myUser.firstName = newValue;
                 });
               },
 
@@ -272,7 +273,7 @@ class _SignUpFormState extends State<SignUpForm> {
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
-              controller: firstNameController,
+              controller: lastNameController,
 
               validator: (value) => value != null && (value.length > 50 || value.isEmpty)
                   ? 'Name length must be between 1-50 characters'
@@ -280,7 +281,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
               onSaved: (newValue) {
                 setState(() {
-                  newUser.lastName = newValue;
+                  UserPreferences.myUser.lastName = newValue;
                 });
               },
 
@@ -386,10 +387,10 @@ class _SignUpFormState extends State<SignUpForm> {
       form.save();
       // final email = emailController.selection.;
       // print(controller.text + '---' + controller.text + '\n');
-      print('First Name: ' +'${newUser.firstName}' +
-          '\nLast Name: ' +'${newUser.lastName}' +
-          '\nEmail: ' +'${newUser.email}'+
-          '\nPassword: '+'${newUser.password}');
+      print('First Name: ' +'${UserPreferences.myUser.firstName}' +
+          '\nLast Name: ' +'${UserPreferences.myUser.lastName}' +
+          '\nEmail: ' +'${UserPreferences.myUser.email}'+
+          '\nPassword: '+'${UserPreferences.myUser.password}');
 
       Navigator.pushNamed(context, '/signuppost');
       // print('${emailController.text}');

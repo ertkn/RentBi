@@ -1,4 +1,5 @@
 import 'package:capstone/utilities/constants.dart';
+import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';
 
 class TextFieldContainer extends StatelessWidget {
@@ -10,6 +11,7 @@ class TextFieldContainer extends StatelessWidget {
       alignment: Alignment.centerLeft,
       decoration: boxDecorationStyle,
       height: 50.0,
+      width: screenWidthPercentage(context,percentage: 0.9),
     );
   }
 }

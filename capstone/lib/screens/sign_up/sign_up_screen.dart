@@ -12,7 +12,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +35,20 @@ class _SignupScreenState extends State<SignupScreen> {
         onPressed: () => Navigator.pop(context),
       ),
       actions: [
-        ElevatedButton(
+        IconButton(
+          tooltip: 'be guest',
+          padding: EdgeInsets.only(right: screenWidthPercentage(context, percentage: 0.135)),
+          onPressed: () {
+            Navigator.pushNamed(context, '/home');
+          },
+          icon: const Icon(
+            Icons.close,
+            size: 32,
+            color: Color(0xBE385C89),
+          ),
+        )
+/*        ElevatedButton(
+
           onPressed: () {
             // Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
             Navigator.pushNamed(context, '/home');
@@ -54,7 +66,7 @@ class _SignupScreenState extends State<SignupScreen> {
             color: Color(0xBE385C89),
             //semanticLabel: 'go without sign',
           ),
-        ),
+        ),*/
       ],
     );
   }

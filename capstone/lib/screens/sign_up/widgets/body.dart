@@ -11,12 +11,18 @@ class Body extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Container(
-        height: double.infinity,
+        height: screenHeight(context),
+        width: screenWidth(context),
         decoration: backgroundDecorationStyle,
         child: SafeArea(
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.fromLTRB(40, 50, 40, 10),
+            padding: EdgeInsets.fromLTRB(
+                screenWidthPercentage(context, percentage: 0.1),
+                screenHeightPercentage(context, percentage: 0.05),
+                screenWidthPercentage(context, percentage: 0.1),
+                screenHeightPercentage(context, percentage: 0.05),
+            ),
             child: Column(
               children: [
                 // verticalSpaceSmall,

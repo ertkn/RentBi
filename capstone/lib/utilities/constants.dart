@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-const kTextColor = Color(0xFF757575);
+// const kTextColor = Color(0xFF757575);
+const kTextColor = Color(0xFFFFFFFF);
 const defaultDuration = Duration(milliseconds: 250);
 
 final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");

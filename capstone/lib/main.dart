@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
+  // runApp(ExpansionTileSample());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,9 +26,10 @@ class MyApp extends StatelessWidget {
       //home: const MyHomePage(title: 'RentBi'),
       // home: LoginScreen(),
       theme: theme(),
-      initialRoute: '/home',
+      initialRoute: '/signuppost',
       routes: {
         '/' : (context) => LoginScreen(),
+        // '/home' : (context) => HomeScreen(),
         '/home' : (context) => HomeScreen(),
         '/signup' : (contex) => SignupScreen(),
         '/profile' : (contex) => ProfileScreen(),
