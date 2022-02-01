@@ -11,6 +11,10 @@ class User {
   String? addressCity;
   String? addressCountry;
   int? phoneNumber;
+  int? day;
+  int? month;
+  int? year;
+
 
   User({
     this.firstName,
@@ -24,5 +28,9 @@ class User {
     this.addressCity,
     this.addressCountry,
     this.phoneNumber,
+    this.day,
+    this.month,
+    this.year
   });
+
 }

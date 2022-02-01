@@ -2,8 +2,8 @@ import 'package:capstone/models/user.dart';
 
 class UserPreferences {
   static User myUser = User(
-    firstName: 'ertekin',
-    lastName: 'özçelik',
+    firstName: 'Ertekin',
+    lastName: 'Özçelik',
     email: 'ert@gmail.com',
     password: '124235',
     // imagePath: 'capstone/assets/anato_finnstark.jpg',

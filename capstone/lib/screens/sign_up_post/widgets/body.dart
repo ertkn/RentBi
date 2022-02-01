@@ -19,7 +19,7 @@ class Body extends StatelessWidget {
             physics: const AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.fromLTRB(
               screenWidthPercentage(context, percentage: 0.1),
-              screenHeightPercentage(context, percentage: 0.05),
+              screenHeightPercentage(context, percentage: 0.075),
               screenWidthPercentage(context, percentage: 0.1),
               screenHeightPercentage(context, percentage: 0.05),
             ),

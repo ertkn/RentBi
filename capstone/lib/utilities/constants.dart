@@ -9,11 +9,22 @@ final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-
 const fieldTextStyle = TextStyle(
   color: Colors.white,
   fontFamily: 'OpenSans',
+  fontSize: 16,
 );
 
+const appBarTitleStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 22,
+    fontFamily: 'OpenSans',
+    fontWeight: FontWeight.w600,
+    letterSpacing: -0.75,
+  );
+
 const hintTextStyle = TextStyle(
-  color: Colors.black,
+  color: Colors.white,
   fontFamily: 'OpenSans',
+  fontSize: 14.5,
+  // fontWeight: FontWeight.w300,
 );
 
 const subtleStyle = TextStyle(

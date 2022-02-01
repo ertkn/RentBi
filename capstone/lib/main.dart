@@ -1,6 +1,6 @@
 import 'package:capstone/screens/home/home_screen.dart';
+import 'package:capstone/screens/profile/profile.dart';
 import 'package:capstone/screens/sign_in/sign_in_screen.dart';
-import 'package:capstone/screens/profile/profile_screen.dart';
 import 'package:capstone/screens/sign_up/sign_up_screen.dart';
 import 'package:capstone/screens/sign_up_post/sign_up_post.dart';
 import 'package:capstone/utilities/theme.dart';
@@ -26,14 +26,14 @@ class MyApp extends StatelessWidget {
       //home: const MyHomePage(title: 'RentBi'),
       // home: LoginScreen(),
       theme: theme(),
-      initialRoute: '/signuppost',
+      initialRoute: '/profile',
       routes: {
-        '/' : (context) => LoginScreen(),
+        '/' : (context) => const LoginScreen(),
         // '/home' : (context) => HomeScreen(),
-        '/home' : (context) => HomeScreen(),
-        '/signup' : (contex) => SignupScreen(),
-        '/profile' : (contex) => ProfileScreen(),
-        '/signuppost' : (contex) => SignUpPost(),
+        '/home' : (context) => const HomeScreen(),
+        '/signup' : (contex) => const SignupScreen(),
+        '/profile' : (contex) => const ProfileNew(),
+        '/signuppost' : (contex) => const SignUpPost(),
 
         // '/login' : (contex) => LoginScreen(),
       },

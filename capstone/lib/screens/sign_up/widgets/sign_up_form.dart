@@ -84,8 +84,8 @@ class _SignUpFormState extends State<SignUpForm> {
               keyboardType: TextInputType.visiblePassword,
               textInputAction: TextInputAction.done,
               controller: passwordController,
-
               onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
+
               onSaved: (newValue) {
                 setState(() {
                   UserPreferences.myUser.password = newValue;
@@ -95,7 +95,7 @@ class _SignUpFormState extends State<SignUpForm> {
               decoration: InputDecoration(
                 // floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintText: 'Enter your Password',
-                hintStyle: fieldTextStyle,
+                hintStyle: hintTextStyle,
                 border: InputBorder.none,
                 // contentPadding: EdgeInsets.only(top: 10.0),
                 prefixIcon: const Icon(
@@ -170,7 +170,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
-                hintStyle: fieldTextStyle,
+                hintStyle: hintTextStyle,
                 border: InputBorder.none,
                 prefixIcon: const Icon(
                   Icons.email,
@@ -244,7 +244,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   onPressed: () => firstNameController.clear(),
                 ),
                 hintText: 'Enter your First Name',
-                hintStyle: fieldTextStyle,
+                hintStyle: hintTextStyle,
               ),
             ),
           ],
@@ -300,7 +300,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   onPressed: () => firstNameController.clear(),
                 ),
                 hintText: 'Enter your Last Name',
-                hintStyle: fieldTextStyle,
+                hintStyle: hintTextStyle,
               ),
             ),
           ],
