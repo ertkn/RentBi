@@ -1,10 +1,22 @@
+/*
 import 'package:capstone/screens/home/home_screen.dart';
 import 'package:capstone/screens/profile/profile.dart';
+import 'package:capstone/screens/profile/settings.dart';
 import 'package:capstone/screens/sign_in/sign_in_screen.dart';
 import 'package:capstone/screens/sign_up/sign_up_screen.dart';
 import 'package:capstone/screens/sign_up_post/sign_up_post.dart';
+*/
+import 'package:capstone/screens/profile/profilenew.dart';
 import 'package:capstone/utilities/theme.dart';
 import 'package:flutter/material.dart';
+
+import 'screens/home/home_screen.dart';
+import 'screens/profile/profile.dart';
+import 'screens/user_settings/user_settings_screen.dart';
+import 'screens/settings/settings.dart';
+import 'screens/sign_in/sign_in_screen.dart';
+import 'screens/sign_up/sign_up_screen.dart';
+import 'screens/sign_up_post/sign_up_post.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,13 +38,16 @@ class MyApp extends StatelessWidget {
       //home: const MyHomePage(title: 'RentBi'),
       // home: LoginScreen(),
       theme: theme(),
-      initialRoute: '/profile',
+      initialRoute: '/profilenew',
       routes: {
         '/' : (context) => const LoginScreen(),
         // '/home' : (context) => HomeScreen(),
         '/home' : (context) => const HomeScreen(),
         '/signup' : (contex) => const SignupScreen(),
-        '/profile' : (contex) => const ProfileNew(),
+        '/userset' : (contex) => const UserSettingsScreen(),
+        '/profile' : (contex) => const Profile(),
+        '/profilenew' : (contex) => const ProfileScreenNew(),
+        '/setting' : (context) => const Settings(),
         '/signuppost' : (contex) => const SignUpPost(),
 
         // '/login' : (contex) => LoginScreen(),

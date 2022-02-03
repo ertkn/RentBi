@@ -2,10 +2,10 @@ import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_settings_screens/flutter_settings_screens.dart';
+import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
-class ProfileNew extends StatelessWidget {
-  const ProfileNew({Key? key}) : super(key: key);
+class Profile extends StatelessWidget {
+  const Profile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,10 +13,11 @@ class ProfileNew extends StatelessWidget {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            // collapsedHeight: 150,
+            // collapsedHeight: 100,
+            // backgroundColor: Colors.amberAccent,
             floating: true,
             elevation: 3,
-            pinned: false,
+            pinned: true,
             leading: IconButton(
               padding: EdgeInsets.only(left: screenWidthPercentage(context, percentage: 0.075)),
               alignment: Alignment.center,
@@ -29,25 +30,32 @@ class ProfileNew extends StatelessWidget {
               tooltip: 'go back',
               onPressed: () => Navigator.pop(context),
             ),
-            // centerTitle: true,
-            /*title: const Text(
+/*            centerTitle: true,
+            title: const Text(
               'User Setting',
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 22,
                 fontFamily: 'OpenSans',
               ),
             ),*/
-            expandedHeight: screenHeightPercentage(context, percentage: 0.25),
+            expandedHeight: screenHeightPercentage(context, percentage: 0.3),
+
             flexibleSpace: FlexibleSpaceBar(
+              titlePadding: const EdgeInsets.all(15),
+              collapseMode: CollapseMode.parallax,
               background: Image.network(
                 UserPreferences.myUser.imagePath,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
               centerTitle: true,
               title: Text(
-                'User Settings',
-                style: appBarTitleStyle.copyWith(color: Colors.white),
+                '${UserPreferences.myUser.firstName}''${UserPreferences.myUser.lastName}',
+                style: appBarTitleStyle.copyWith(
+                  color: Colors.white,
+                  letterSpacing: -1.5,
+                  wordSpacing: 2.5,
+                ),
               ),
             ),
 
@@ -93,10 +101,12 @@ class ProfileNew extends StatelessWidget {
               );
             }, childCount: 5),
           ),*/
+
           SliverFixedExtentList(
-            itemExtent: screenHeightPercentage(context, percentage: 0.1),
+            itemExtent: screenHeightPercentage(context, percentage: 0.08),
             delegate: SliverChildListDelegate(
               [
+                // verticalSpaceTiny,
                 menuBuilder(
                   title: 'Profile',
                   iconData: Icons.person_outline,
@@ -116,12 +126,22 @@ class ProfileNew extends StatelessWidget {
                 // buildDivider(context),
                 menuBuilder(
                   title: 'Settings',
-                  iconData: Icons.settings,
+                  iconData: Icons.settings_rounded,
                   navPath: () => Navigator.pushNamed(context, '/settings'),
                 ),
                 // buildDivider(context),
                 menuBuilder(
-                  title: 'Log out',
+                  title: 'Logout',
+                  iconData: Icons.logout,
+                  navPath: () => Navigator.pushNamed(context, '/'),
+                ),
+                menuBuilder(
+                  title: 'Report A Bug',
+                  iconData: Icons.bug_report_outlined,
+                  navPath: () => Navigator.pushNamed(context, '/'),
+                ),
+                menuBuilder(
+                  title: 'Send Feedback',
                   iconData: Icons.logout,
                   navPath: () => Navigator.pushNamed(context, '/'),
                 ),
@@ -134,6 +154,42 @@ class ProfileNew extends StatelessWidget {
   }
 
   Widget menuBuilder({required String title, required IconData iconData, required Function() navPath}) {
+
+    return SimpleSettingsTile(
+      leading: iconWidget(iconData),
+      title: title,
+      subtitle: '',
+      onTap: navPath,
+      enabled: true,
+    );
+  }
+
+  ClipRRect iconWidget(IconData iconData) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        height: 35,
+        width: 35,
+        decoration: const BoxDecoration(
+          color: Colors.blueGrey,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 60.0,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Icon(
+          iconData,
+          size: 24,
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+}
+
 /*      leading: Icon(
         iconData,
         color: Colors.black,
@@ -155,7 +211,7 @@ class ProfileNew extends StatelessWidget {
       // horizontalTitleGap: 27.5,
       contentPadding: const EdgeInsets.all(20),*/
 
-    return TextFormField(
+/*    return TextFormField(
       onTap: navPath,readOnly: true,
 
       style: fieldTextStyle,
@@ -192,23 +248,4 @@ class ProfileNew extends StatelessWidget {
         // hintText: 'Enter your First Name',
         // hintStyle: hintTextStyle,
       ),
-    );
-/*  return SimpleSettingsTile(
-    title: title,
-    enabled: true,
-    leading: Icon(iconData,size: 24,color: Colors.black,),
-    onTap: navPath,
-  );*/
-  }
-
-  Divider buildDivider(BuildContext context) {
-    return Divider(
-      height: screenHeightPercentage(context, percentage: 0.025),
-      // color: const Color(0xFF0E2B4E),
-      color: Colors.black,
-      thickness: 1,
-      // indent: screenWidthPercentage(context,percentage: 0.1),
-      // endIndent: screenWidthPercentage(context,percentage: 0.1),
-    );
-  }
-}
+    );*/

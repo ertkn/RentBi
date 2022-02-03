@@ -97,7 +97,7 @@ class HomeScreen extends StatelessWidget {
           color: Colors.transparent,
           iconSize: screenWidthPercentage(context, percentage: 0.1),
           // onPressed: () => Navigator.pop(context),
-          onPressed: () => Navigator.pushNamed(context, '/profile'),
+          onPressed: () => Navigator.pushNamed(context, '/userset'),
 /*           icon: CircleAvatar(
             foregroundImage: NetworkImage(UserPreferences.myUser.imagePath),
             // backgroundImage: NetworkImage(),

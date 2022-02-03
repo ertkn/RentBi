@@ -208,9 +208,6 @@ class Country{
 Cities city  = Cities(cities: [['']]);
 
 */
-
-import 'package:flutter/material.dart';
-
 class Locations {
   Locations({this.location, this.sublocation, this.children = const <Locations>[]});
 
@@ -284,7 +281,7 @@ final List<Locations> data = <Locations>[
     ],
   ),
 ];
-
+/*
 class ExpansionTileSample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -333,7 +330,7 @@ class EntryItem extends StatelessWidget {
 
 void main() {
   runApp(ExpansionTileSample());
-}
+}*/
 // List<List<List<String>>> location = [[['Turkey'],[]],[['USA']],['','','','',],['','','','',],];
 
 /*List<List> turkey = [istanbul, ankara];

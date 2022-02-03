@@ -1,35 +1,37 @@
 import 'package:flutter/material.dart';
 
 // const kTextColor = Color(0xFF757575);
-const kTextColor = Color(0xFFFFFFFF);
+const kTextColorW = Color(0xFFFFFFFF);
+const kTextColorB = Color(0xFF000000);
+
 const defaultDuration = Duration(milliseconds: 250);
 
 final RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 const fieldTextStyle = TextStyle(
   color: Colors.white,
-  fontFamily: 'OpenSans',
+  // fontFamily: 'OpenSans',
   fontSize: 16,
 );
 
 const appBarTitleStyle = TextStyle(
     color: Colors.black,
-    fontSize: 22,
-    fontFamily: 'OpenSans',
-    fontWeight: FontWeight.w600,
+    fontSize: 20,
+    // fontFamily: 'OpenSans',
+    fontWeight: FontWeight.w500,
     letterSpacing: -0.75,
   );
 
 const hintTextStyle = TextStyle(
   color: Colors.white,
-  fontFamily: 'OpenSans',
+  // fontFamily: 'OpenSans',
   fontSize: 14.5,
   // fontWeight: FontWeight.w300,
 );
 
 const subtleStyle = TextStyle(
   color: Color(0xBE244D80),
-  fontFamily: 'RobotoSlab',
+  // fontFamily: 'RobotoSlab',
   fontSize: 30.0,
   fontWeight: FontWeight.w500,
 );
@@ -37,7 +39,7 @@ const subtleStyle = TextStyle(
 const labelStyle = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
+  // fontFamily: 'OpenSans',
 );
 
 const buttonTextStyle = TextStyle(
@@ -45,7 +47,7 @@ const buttonTextStyle = TextStyle(
   letterSpacing: 1.5,
   fontSize: 18.0,
   fontWeight: FontWeight.bold,
-  fontFamily: 'OpenSans',
+  // fontFamily: 'OpenSans',
 );
 
 final boxDecorationStyle = BoxDecoration(

@@ -1,4 +1,4 @@
-import 'dart:math';
+/*import 'dart:math';
 
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/constants.dart';
@@ -55,12 +55,6 @@ class _EmailTextFieldState extends State<EmailTextField> {
               controller: widget.controller,
 
               onChanged: (value) {
-/*                if(emailValidatorRegExp.hasMatch(value)){
-                  setState(() {
-                    random = Random().nextInt(100-15);
-                  });
-                  print('onChange'+ '---' + '$random');
-                }*/
                 if(EmailValidator.validate(value)){
                   setState(() {
                     random = Random().nextInt(100-15);
@@ -91,12 +85,7 @@ class _EmailTextFieldState extends State<EmailTextField> {
                   ),
                   onPressed: () => widget.controller.clear(),
                 ),
-/*              suffixIcon: widget.controller.text.isEmpty
-                ? Container(width: 0)
-                : IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () => widget.controller.clear(),
-            ),*/
+
               ),
             ),
           ],
@@ -104,4 +93,10 @@ class _EmailTextFieldState extends State<EmailTextField> {
       ],
     );
   }
-}
+}*/
+/*              suffixIcon: widget.controller.text.isEmpty
+                ? Container(width: 0)
+                : IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () => widget.controller.clear(),
+            ),*/

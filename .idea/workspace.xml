@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="45a7f0fd-c139-43c3-81b4-c6502a94d53e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/capstone/android/app/src/main/kotlin/com/capstone/rentbi/MainActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Black.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-BlackItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-BoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-ExtraBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-ExtraBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-ExtraLight.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-ExtraLightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Italic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Light.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-LightItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Medium.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-MediumItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Regular.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-SemiBold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-SemiBoldItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-Thin.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/fonts/BarlowSemiCondensed/BarlowSemiCondensed-ThinItalic.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/lib/screens/profile/profilenew.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/lib/screens/profile/widgets/Body.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/lib/screens/settings/settings.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/capstone/lib/screens/user_settings/widgets/body.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ozclk.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/android/app/src/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/android/app/src/main/kotlin/com/example/capstone/MainActivity.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/android/app/src/profile/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/models/categories.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/models/categories.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/screens/home/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/screens/home/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/screens/profile/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/screens/profile/profile.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/screens/profile/profile_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/screens/user_settings/user_settings_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/screens/profile/widgets/body.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/utilities/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/utilities/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/utilities/theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/utilities/theme.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/utilities/user_preferences.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/utilities/user_preferences.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/widgets/divider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/widgets/divider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/lib/widgets/emailTextField.dart" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/lib/widgets/emailTextField.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="24c3GTt4yQfYAOChbYad1RMEWOp" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="45a7f0fd-c139-43c3-81b4-c6502a94d53e" name="Default Changelist" comment="" />
+      <created>1643915951261</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643915951261</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
