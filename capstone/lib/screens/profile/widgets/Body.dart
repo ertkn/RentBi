@@ -18,7 +18,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
 
-  void getData() async {
+/*   void getData() async {
 
     // Response response = await get(Uri.http('jsonplaceholder.typicode.com', '/todos/1' ));
     Response response = await get(Uri.http('worldtimeapi.org', 'api/timezone/Europe/Istanbul' ));
@@ -45,7 +45,7 @@ class _BodyState extends State<Body> {
     super.initState();
     getData();
   }
-
+ */
 
 
   @override

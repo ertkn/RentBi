@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "249493758472",
+    "project_id": "rent-bi-8af2a",
+    "storage_bucket": "rent-bi-8af2a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249493758472:android:25014e406ad2d3e15ba7bd",
+        "android_client_info": {
+          "package_name": "com.capstone.rentbi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249493758472-kot2etanqmgi9346s8rbk4gji8e12v9l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnI0JQE1BzOVIA3YgEUCL3YeJAiz_X67g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249493758472-kot2etanqmgi9346s8rbk4gji8e12v9l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
