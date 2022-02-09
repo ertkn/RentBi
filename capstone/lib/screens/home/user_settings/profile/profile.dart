@@ -121,7 +121,7 @@ class Profile extends StatelessWidget {
                 menuBuilder(
                   title: 'Shopping Cart',
                   iconData: Icons.shopping_cart_outlined,
-                  navPath: () => Navigator.pushNamed(context, '/cart'),
+                  navPath: () => Navigator.pushNamed(context, '/home'),
                 ),
                 // buildDivider(context),
                 menuBuilder(

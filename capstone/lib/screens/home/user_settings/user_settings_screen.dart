@@ -1,9 +1,16 @@
 import 'package:capstone/screens/home/user_settings/widgets/body.dart';
 import 'package:capstone/utilities/spacing.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class UserSettingsScreen extends StatefulWidget {
-  const UserSettingsScreen({Key? key}) : super(key: key);
+  final FirebaseAuth _auth;
+
+  const UserSettingsScreen({Key? key, required FirebaseAuth auth})
+      : _auth = auth,
+        super(key: key);
+
+  // FirebaseAuth get auth => _auth;
 
   @override
   _UserSettingsScreenState createState() => _UserSettingsScreenState();
@@ -27,13 +34,13 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
       appBar: buildAppBar(context),
       // bottomNavigationBar: NavigationDrawer(),
 
-      body: const Body(),
+      body: Body(),
     );
   }
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      toolbarHeight: screenHeightPercentage(context,percentage: 0.07),
+      toolbarHeight: screenHeightPercentage(context, percentage: 0.07),
       // toolbarHeight: 65,
       foregroundColor: Colors.transparent,
       backgroundColor: const Color(0xFFB6CFEC),
@@ -44,7 +51,8 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
 
       // backgroundColor: const Color(0xFFB6CFEC),
       leading: IconButton(
-        padding: EdgeInsets.only(left: screenWidthPercentage(context, percentage: 0.0525)),
+        padding: EdgeInsets.only(
+            left: screenWidthPercentage(context, percentage: 0.0525)),
         alignment: Alignment.center,
         icon: const Icon(
           Icons.arrow_back_ios,
@@ -69,13 +77,20 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
 
       actions: [
         IconButton(
-          padding: EdgeInsets.only(right: screenWidthPercentage(context, percentage: 0.0375)),
+          padding: EdgeInsets.only(
+              right: screenWidthPercentage(context, percentage: 0.0375)),
           tooltip: 'quit',
           color: Colors.black,
           iconSize: screenWidthPercentage(context, percentage: 0.1),
           // onPressed: () => Navigator.pop(context),
-          onPressed: () => Navigator.pushNamed(context, '/'),
-          icon: const Icon(Icons.logout,size: 30,),
+          onPressed: () async {
+            await widget._auth.signOut();
+            Navigator.pushReplacementNamed(context, '/');
+          },
+          icon: const Icon(
+            Icons.logout,
+            size: 30,
+          ),
         ),
       ],
     );

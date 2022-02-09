@@ -9,6 +9,7 @@ import 'package:capstone/screens/sign_up_post/sign_up_post.dart';
 import 'package:capstone/screens/home/user_settings/profile/profilenew.dart';
 import 'package:capstone/screens/wrapper.dart';
 import 'package:capstone/utilities/theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -23,12 +24,13 @@ import 'screens/authentication/sign_up_post/sign_up_post.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MyApp());
+  runApp(MyApp());
   // runApp(ExpansionTileSample());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -42,14 +44,14 @@ class MyApp extends StatelessWidget {
       //home: const MyHomePage(title: 'RentBi'),
       // home: LoginScreen(),
       theme: theme(),
-      initialRoute: '/login',
+      initialRoute: '/',
       routes: {
         '/' : (context) => const Wrapper(),
-        '/login' : (context) => const LoginScreen(),
+        '/login' : (context) => LoginScreen(),
         // '/home' : (context) => HomeScreen(),
         '/home' : (context) => const HomeScreen(),
         '/signup' : (contex) => const SignupScreen(),
-        '/userset' : (contex) => const UserSettingsScreen(),
+        '/userset' : (contex) => UserSettingsScreen(auth: _auth,),
         '/profile' : (contex) => const Profile(),
         '/profilenew' : (contex) => const ProfileScreenNew(),
         '/setting' : (context) => const Settings(),

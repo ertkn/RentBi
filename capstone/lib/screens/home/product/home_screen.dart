@@ -26,7 +26,8 @@ class HomeScreen extends StatelessWidget {
       titleSpacing: screenWidthPercentage(context, percentage: 0.02),
 
       // backgroundColor: const Color(0xFFB6CFEC),
-      leading: IconButton(
+      // automaticallyImplyLeading: false,
+/*      leading: IconButton(
         padding: EdgeInsets.only(left: screenWidthPercentage(context, percentage: 0.025)),
         alignment: Alignment.center,
         icon: const Icon(
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
         // constraints: const BoxConstraints(minHeight: 100.0, minWidth: 0.0),
         tooltip: 'go back',
         onPressed: () => Navigator.pop(context),
-      ),
+      ),*/
 
       /*title: SizedBox(
         // color: Colors.indigoAccent,
@@ -94,6 +95,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),*/
+      centerTitle: true,
       title: const SearchBar(),
 
       actions: [

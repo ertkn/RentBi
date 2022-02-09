@@ -1,11 +1,14 @@
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
 class Body extends StatelessWidget {
-  const Body({Key? key}) : super(key: key);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,8 @@ class Body extends StatelessWidget {
                   // alignment: Alignment.center,
                   height: screenHeightPercentage(context, percentage: 0.1875),
                   // color: Colors.transparent,
-                  padding: EdgeInsets.fromLTRB(0, screenWidthPercentage(context,percentage: 0.1), 0, 0),
+                  padding: EdgeInsets.fromLTRB(
+                      0, screenWidthPercentage(context, percentage: 0.1), 0, 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,19 +47,22 @@ class Body extends StatelessWidget {
                           // 'https://pbs.twimg.com/media/FHfttxDWQAAJQNK?format=jpg&name=large',
                           UserPreferences.myUser.imagePath,
                           // semanticLabel: 'Profile Picture',
-                          height: screenHeightPercentage(context, percentage: 0.25) /
+                          height: screenHeightPercentage(context,
+                                  percentage: 0.25) /
                               screenWidthPercentage(context, percentage: 0.1) *
                               20,
-                          width: screenHeightPercentage(context, percentage: 0.25) /
+                          width: screenHeightPercentage(context,
+                                  percentage: 0.25) /
                               screenWidthPercentage(context, percentage: 0.1) *
                               20,
                           fit: BoxFit.cover,
-                          loadingBuilder: (context, child, loadingProgress) => loadingProgress == null
-                              ? child
-                              : const CircularProgressIndicator(
-                                  color: Colors.lightBlue,
-                                  backgroundColor: Colors.transparent,
-                                ),
+                          loadingBuilder: (context, child, loadingProgress) =>
+                              loadingProgress == null
+                                  ? child
+                                  : const CircularProgressIndicator(
+                                      color: Colors.lightBlue,
+                                      backgroundColor: Colors.transparent,
+                                    ),
                         ),
                         // clipBehavior: Clip.antiAliasWithSaveLayer,
                       ),
@@ -67,16 +74,18 @@ class Body extends StatelessWidget {
                           Text(
                             '${UserPreferences.myUser.firstName} ${UserPreferences.myUser.lastName}',
                             style: appBarTitleStyle.copyWith(
-                              wordSpacing: -3,letterSpacing: -1.75
-                            ),
+                                wordSpacing: -3, letterSpacing: -1.75),
                           ),
                           Text(
                             '${UserPreferences.myUser.email}',
-                            style: appBarTitleStyle.copyWith(color: Colors.black54,),
+                            style: appBarTitleStyle.copyWith(
+                              color: Colors.black54,
+                            ),
                           )
                         ],
                       ),
-                      const Icon(Icons.arrow_forward_ios, color: Colors.black87),
+                      const Icon(Icons.arrow_forward_ios,
+                          color: Colors.black87),
                     ],
                   ),
                 ),
@@ -102,7 +111,7 @@ class Body extends StatelessWidget {
                 menuBuilder(
                   title: 'Shopping Cart',
                   iconData: Icons.shopping_cart_outlined,
-                  navPath: () => Navigator.pushNamed(context, '/cart'),
+                  navPath: () => Navigator.pushNamed(context, '/home'),
                   color: const Color(0xb26ccb79),
                 ),
                 menuBuilder(
@@ -128,7 +137,7 @@ class Body extends StatelessWidget {
                 menuBuilder(
                   title: 'Send Feedback',
                   iconData: Icons.feedback_outlined,
-                  navPath: () => Navigator.pushNamed(context, '/'),
+                  navPath: () => Navigator.pushReplacementNamed(context, '/'),
                   color: const Color(0xdadee268),
                 ), //
                 menuBuilder(
@@ -140,7 +149,10 @@ class Body extends StatelessWidget {
                 menuBuilder(
                   title: 'Logout',
                   iconData: Icons.logout,
-                  navPath: () => Navigator.pushNamed(context, '/'),
+                  navPath: () async {
+                    await _auth.signOut();
+                    Navigator.pushReplacementNamed(context, '/') ;
+                  },
                   color: const Color(0xdae26872),
                 ),
               ],
@@ -152,7 +164,10 @@ class Body extends StatelessWidget {
   }
 
   Widget menuBuilder(
-      {required String title, required IconData iconData, required Function() navPath, required Color color}) {
+      {required String title,
+      required IconData iconData,
+      required Function() navPath,
+      required Color color}) {
     return SizedBox(
       height: 68,
       width: double.infinity,

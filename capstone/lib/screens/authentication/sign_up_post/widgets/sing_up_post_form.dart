@@ -3,7 +3,6 @@ import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/snackbar.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
-import 'package:capstone/widgets/loginButton.dart';
 import 'package:capstone/widgets/text_field_container.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ class SignUpPostForm extends StatefulWidget {
 }
 
 class _SignUpPostFormState extends State<SignUpPostForm> {
-
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // FocusNode focusNodePhone = FocusNode();
@@ -705,7 +703,7 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
               }
             });
           // _registerWithEmailNPassword();
-            print('out to registered: ${isValidate}');
+            print('out to registered: ${isValidate.toString()}');
           }
         },
         // onPressed: () => print('Login Button Pressed'),
@@ -794,26 +792,42 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
         password: UserPreferences.newUser.password!,
       );
       final User user = userCredential.user!;
+/*      FirebaseFirestore.instance.collection('users').doc().set({
+        'uid': user.uid,
+        'first name': UserPreferences.newUser.firstName,
+        'last name': UserPreferences.newUser.lastName,
+        'email': user.email,
+        'password': UserPreferences.newUser.password,
+        'phone number': UserPreferences.newUser.phoneNumber,
+        'about': UserPreferences.newUser.about,
+        'address': UserPreferences.newUser.address,
+        'district': UserPreferences.newUser.addressDistrict,
+        'city': UserPreferences.newUser.addressCity,
+        'country': UserPreferences.newUser.addressCountry,
+        // 'isEmailVerified': user.emailVerified, // will also be false
+        'photoUrl': UserPreferences.newUser.imagePath, // will always be null
+      });*/
 
       if (user != null) {
         setState(() {
           SnackBarMessage.showSnackBar(context,
-              text: 'Register accomplished\n\n}'
-                  '${UserPreferences.newUser.firstName}'
+              text: 'Register accomplished\n\n'
+                  // '${user.uid}\t'
+                  '${UserPreferences.newUser.firstName} '
                   '${UserPreferences.newUser.lastName}');
-          Navigator.pushReplacementNamed(context, '/home');
         });
+          Navigator.pushReplacementNamed(context, '/home');
       } else {
         setState(() {
           SnackBarMessage.showSnackBar(context,
-              text: 'register, it seems failed..');
+              text: 'r-register, it seems failed..');
         });
       }
     } catch (e) {
       debugPrint(e.toString());
       setState(() {
         SnackBarMessage.showSnackBar(context,
-            text: 'ouch!! register is failed!\n\n$e');
+            text: 'ouch!! register is failed!\n\n${e.toString()}');
       });
     }
   }

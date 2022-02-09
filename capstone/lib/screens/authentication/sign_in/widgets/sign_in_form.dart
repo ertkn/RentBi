@@ -1,14 +1,11 @@
-import 'package:capstone/models/user.dart' as u;
 import 'package:capstone/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/snackbar.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
-import 'package:capstone/widgets/loginButton.dart';
 import 'package:capstone/widgets/text_field_container.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class SignInForm extends StatefulWidget {
@@ -20,23 +17,29 @@ class SignInForm extends StatefulWidget {
 
 class _SignInFormState extends State<SignInForm> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+
   // u.User newUser = UserPreferences.myUser;
   bool? _rememberMe = false;
-  String? email;
+
+  // String? email;
   bool isHidden = true;
   bool isValidate = false;
-  bool val = false;
+  bool _isSuccess = false;
+
+  // bool val = false;
 
   // final passwordController = TextEditingController();
   // final emailController = TextEditingController();
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     // passwordController.dispose();
     // emailController.dispose();
-    _controller.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -85,7 +88,7 @@ class _SignInFormState extends State<SignInForm> {
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
-              controller: _controller,
+              controller: _emailController,
 
 /*              onChanged: (value) {
                 if (emailValidatorRegExp.hasMatch(value)) {
@@ -109,6 +112,7 @@ class _SignInFormState extends State<SignInForm> {
                   UserPreferences.myUser.email = newValue;
                 });
               },
+
               validator: (email) =>
                   email != null && !EmailValidator.validate(email)
                       ? 'Enter a valid email'
@@ -127,7 +131,7 @@ class _SignInFormState extends State<SignInForm> {
                     Icons.close,
                     color: Colors.white54,
                   ),
-                  onPressed: () => _controller.clear(),
+                  onPressed: () => _emailController.clear(),
                 ),
 /*              suffixIcon: widget.controller.text.isEmpty
                 ? Container(width: 0)
@@ -198,6 +202,7 @@ class _SignInFormState extends State<SignInForm> {
           children: [
             const TextFieldContainer(),
             TextFormField(
+              controller: _passwordController,
               style: fieldTextStyle,
               cursorColor: Colors.white,
               obscureText: isHidden,
@@ -219,7 +224,7 @@ class _SignInFormState extends State<SignInForm> {
               // maxLength: 24,
 
               validator: (password) => password != null && password.length < 8
-                  ? 'Enter min. 5 characters'
+                  ? 'Enter min. 8 characters'
                   : null,
 
               decoration: InputDecoration(
@@ -325,33 +330,61 @@ class _SignInFormState extends State<SignInForm> {
           final form = formKey.currentState!;
           if (form.validate()) {
             form.save();
+            // print(_emailController.text);
+            // print(_passwordController.text);
+            _signIn();
+
             // validFunction();
 /*             val = (await buildDialog())!;
             if(val == true){
               print('goes to registered');
               await _registerWithEmailNPassword();
             }*/
-            buildDialog().then((_) {
+
+/*            buildDialog().then((_) {
               if(isValidate == true){
                 print('goes to registered');
                 _registerWithEmailNPassword();
               }
-            });
-            print('out to registered: ${isValidate}');
+            });*/
+
+            print('out to registered: ${isValidate.toString()}');
             // print('BuildDialog: ${buildDialog()}');
             // _registerWithEmailNPassword();
           }
         },
         // onPressed: () => print('Login Button Pressed'),
         child: const Text(
-          'Sign Up',
+          'LOGIN',
           style: buttonTextStyle,
         ),
       ),
     );
   }
 
-  buildDialog() async {
+  void _signIn() async {
+    try{
+      final UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+      final User user = userCredential.user!;
+      _isSuccess =true;
+      SnackBarMessage.showSnackBar(context, text: 'welcome back ${UserPreferences.myUser.firstName}',);
+      Navigator.pushReplacementNamed(context, '/home');
+
+    }on FirebaseAuthException catch(e){
+      _isSuccess = false;
+      SnackBarMessage.showSnackBar(context, text: 'ouch an error catched! ${e.message}',);
+    }
+    catch(e){
+      _isSuccess = false;
+      SnackBarMessage.showSnackBar(context, text: 'ouch an error catched!! ${e.toString()}',);
+      debugPrint(e.toString());
+    }
+  }
+
+/*  buildDialog() async {
     await showDialog<bool>(
       context: context,
       builder: (context) => buildAlertDialog(),
@@ -392,7 +425,7 @@ class _SignInFormState extends State<SignInForm> {
   Future _registerWithEmailNPassword() async {
     try {
       final UserCredential userCredential =
-      await _auth.createUserWithEmailAndPassword(
+          await _auth.createUserWithEmailAndPassword(
         email: UserPreferences.myUser.email!,
         password: UserPreferences.myUser.password!,
       );
@@ -400,14 +433,17 @@ class _SignInFormState extends State<SignInForm> {
 
       if (user != null) {
         setState(() {
+          _isSuccess = true;
           SnackBarMessage.showSnackBar(context,
               text: 'Register accomplished\n\n'
+                  '${user.uid}\t'
                   '${UserPreferences.myUser.firstName} '
                   '${UserPreferences.myUser.lastName}');
-          Navigator.pushReplacementNamed(context, '/home');
         });
+        Navigator.pushReplacementNamed(context, '/home');
       } else {
         setState(() {
+          _isSuccess = false;
           SnackBarMessage.showSnackBar(context,
               text: 'register, it seems failed..');
         });
@@ -415,11 +451,12 @@ class _SignInFormState extends State<SignInForm> {
     } catch (e) {
       debugPrint(e.toString());
       setState(() {
+        _isSuccess = false;
         SnackBarMessage.showSnackBar(context,
             text: 'ouch!! register is failed!\n\n$e');
       });
     }
-  }
+  }*/
 
 /*  void validFunction() {
     final form = formKey.currentState!;
@@ -442,11 +479,11 @@ class _SignInFormState extends State<SignInForm> {
           '${UserPreferences.myUser.password}');
 
       Navigator.pushReplacementNamed(context, '/home');
-      *//*ScaffoldMessenger.of(context)
+      */ /*ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(
           content: Text('Your email is $email'),
-        ));*//*
+        ));*/ /*
     }
   }
 

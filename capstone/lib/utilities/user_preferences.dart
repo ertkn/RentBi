@@ -26,8 +26,11 @@ class UserPreferences {
     lastName: '',
     email: '',
     password: '',
-    imagePath: '',
-    about: '',
+    imagePath: 'https://pbs.twimg.com/media/FHfttxDWQAAJQNK?format=jpg&name=large',
+    about: 'Integer id dignissim sem. Praesent hendrerit enim nisl, consequat bibendum lorem tempor vitae.'
+        ' In finibus augue eget laoreet scelerisque. Nunc accumsan lacinia nibh quis mattis.'
+        ' Aliquam in nisi risus. Fusce dignissim ligula ac augue tristique congue. Mauris congue rutrum ligula,'
+        ' quis euismod elit mattis non.',
     address: '',
     addressDistrict: '',
     addressCity: '',

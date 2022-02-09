@@ -1,9 +1,11 @@
 import 'package:capstone/screens/authentication/sign_in/widgets/body.dart';
 import 'package:capstone/utilities/spacing.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  LoginScreen({Key? key}) : super(key: key);
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -18,25 +20,31 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       // drawer: const NavigationDrawer(),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: const Color(0xFFB6CFEC),
         elevation: 0.0,
         actions: [
           IconButton(
-              padding: EdgeInsets.symmetric(
-                  horizontal: screenWidthPercentage(
-                    context,
-                    percentage: 0.1,
-                  ),
-                  vertical: 0),
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-              icon: const Icon(Icons.arrow_forward_ios_outlined))
+            padding: EdgeInsets.symmetric(
+              horizontal: screenWidthPercentage(context, percentage: 0.1),
+              vertical: 0,
+            ),
+            onPressed: () async {
+              _singInAnonymously();
+            },
+            tooltip: 'go with anonymously',
+            icon: const Icon(Icons.arrow_forward_ios_outlined),
+          ),
         ],
       ),
       //extendBodyBehindAppBar: true,
       body: const Body(),
     );
+  }
+
+  _singInAnonymously() async {
+    await widget._auth.signInAnonymously();
+    Navigator.pushReplacementNamed(context, '/home');
   }
 
 /*  Widget _closeButton() {
