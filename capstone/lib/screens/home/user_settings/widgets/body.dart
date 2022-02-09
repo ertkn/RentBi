@@ -1,10 +1,6 @@
-import 'package:capstone/screens/profile/profile.dart';
-import 'package:capstone/screens/user_settings/user_settings_screen.dart';
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_settings_screens/flutter_settings_screens.dart';
 
@@ -93,7 +89,7 @@ class Body extends StatelessWidget {
                 menuBuilder(
                   title: 'Profile',
                   iconData: Icons.person_outline,
-                  navPath: () => Navigator.pushNamed(context, '/profile'),
+                  navPath: () => Navigator.pushNamed(context, '/profilenew'),
                   color: const Color(0xb268bce2),
                 ),
                 menuBuilder(

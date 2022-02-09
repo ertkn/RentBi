@@ -27,11 +27,11 @@ class UserPreferences {
     email: '',
     password: '',
     imagePath: '',
-/*      about: 'dev',
-      address: 'istanbul/pendik',
-      addressDistrict: 'pendik',
-      addressCity: 'istanbul',
-      addressCountry: 'türkiye',
-      phoneNumber: 01243265,*/
+    about: '',
+    address: '',
+    addressDistrict: '',
+    addressCity: '',
+    addressCountry: '',
+    phoneNumber: null,
   );
 }

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
@@ -10,7 +8,9 @@ import 'package:http/http.dart';
 import 'dart:convert';
 
 class Body extends StatefulWidget {
-  const Body({Key? key}) : super(key: key);
+  // int isEdit = 0;
+
+  Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -18,39 +18,37 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
 
-/*   void getData() async {
-
+  void getData() async {
     // Response response = await get(Uri.http('jsonplaceholder.typicode.com', '/todos/1' ));
-    Response response = await get(Uri.http('worldtimeapi.org', 'api/timezone/Europe/Istanbul' ));
+    Response response =
+        await get(Uri.http('worldtimeapi.org', 'api/timezone/Europe/Istanbul'));
     Map data = jsonDecode(response.body);
     // print('$data\n\n');
     String timezone = data['timezone'];
-    String utc_datetime = data['utc_datetime'];
+    String utcDatetime = data['utc_datetime'];
 
-    String offset = data['utc_offset'].substring(1,3);
-    print('${data['utc_offset']}  ''  ${offset}');
+    String offset = data['utc_offset'].substring(1, 3);
+    print('${data['utc_offset']}  ' '  ${offset}');
     String datetime = data['datetime'];
-    print('timezone: $timezone''\nutc_datetime: $utc_datetime''\ndatetime: $datetime');
+    print('timezone: $timezone'
+        '\nutc_datetime: $utcDatetime'
+        '\ndatetime: $datetime');
 
     DateTime now = DateTime.parse(datetime);
     print('\nBefore DateTime datetime: ${now}');
 
     now = now.add(Duration(hours: int.parse(offset)));
     print('After  DateTime datetime: ${now}');
-}
-
+  }
 
   @override
   void initState() {
     super.initState();
     getData();
   }
- */
-
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> profileLabels = [
       // verticalSpaceTiny,
       Container(
@@ -58,7 +56,8 @@ class _BodyState extends State<Body> {
         padding: const EdgeInsets.fromLTRB(15, 10, 0, 15),
         child: Text(
           'USER INFORMATION',
-          style: appBarTitleStyle.copyWith(fontSize: 18, fontWeight: FontWeight.w600),
+          style: appBarTitleStyle.copyWith(
+              fontSize: 18, fontWeight: FontWeight.w600),
           textAlign: TextAlign.left,
         ),
       ),
@@ -97,9 +96,10 @@ class _BodyState extends State<Body> {
 
         // controller: firstNameController,
 
-        validator: (value) => value != null && (value.length > 50 || value.isEmpty)
-            ? 'Name length must be between 1-50 characters'
-            : null,
+        validator: (value) =>
+            value != null && (value.length > 50 || value.isEmpty)
+                ? 'Name length must be between 1-50 characters'
+                : null,
 
         onSaved: (newValue) {
           setState(() {
@@ -110,7 +110,7 @@ class _BodyState extends State<Body> {
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.auto,
           labelText: '${UserPreferences.myUser.firstName}',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: const TextStyle(color: Colors.black),
 
 /*          border: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black,style: BorderStyle.solid,width: 2)
@@ -144,9 +144,10 @@ class _BodyState extends State<Body> {
 
         // controller: lastNameController,
 
-        validator: (value) => value != null && (value.length > 50 || value.isEmpty)
-            ? 'Name length must be between 1-50 characters'
-            : null,
+        validator: (value) =>
+            value != null && (value.length > 50 || value.isEmpty)
+                ? 'Name length must be between 1-50 characters'
+                : null,
 
         onSaved: (newValue) {
           setState(() {
@@ -156,7 +157,7 @@ class _BodyState extends State<Body> {
 
         decoration: InputDecoration(
           labelText: '${UserPreferences.myUser.lastName}',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: const TextStyle(color: Colors.black),
 
           border: InputBorder.none,
           contentPadding: const EdgeInsets.fromLTRB(25, 25, 0, 5),
@@ -192,12 +193,12 @@ class _BodyState extends State<Body> {
         // controller: emailController,
 
 /*        onChanged: (value) {
-*//*                if (emailValidatorRegExp.hasMatch(value)) {
+*/ /*                if (emailValidatorRegExp.hasMatch(value)) {
                   setState(() {
                     random = Random().nextInt(100 - 15);
                   });
                   print('onChange' + '---' + '$random');
-                }*//*
+                }*/ /*
 
           if (EmailValidator.validate(value)) {
             setState(() {
@@ -212,13 +213,12 @@ class _BodyState extends State<Body> {
             UserPreferences.myUser.email = newValue;
           });
         },
- /*       validator: (email) =>
+        /*       validator: (email) =>
         email != null && !EmailValidator.validate(email) ? 'Enter a valid email' : null,*/
 
         decoration: InputDecoration(
           labelText: '${UserPreferences.myUser.email}',
-          labelStyle: TextStyle(color: Colors.black),
-
+          labelStyle: const TextStyle(color: Colors.black),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.fromLTRB(25, 25, 0, 5),
 
@@ -266,18 +266,19 @@ class _BodyState extends State<Body> {
 
         onSaved: (newValue) {
           setState(
-                () {
+            () {
               // int phoneInt = int.parse(newValue!),
               UserPreferences.myUser.phoneNumber = int.parse(newValue!);
             },
           );
         },
-        validator: (val) => val != null && val.length != 11 ? 'Enter 11 digit' : null,
+        validator: (val) =>
+            val != null && val.length != 11 ? 'Enter 11 digit' : null,
         decoration: InputDecoration(
           labelText: '${UserPreferences.myUser.phoneNumber}',
-          labelStyle: TextStyle(color: Colors.black),
+          labelStyle: const TextStyle(color: Colors.black),
           // floatingLabelBehavior: FloatingLabelBehavior.always,
-         /* border: const OutlineInputBorder(
+          /* border: const OutlineInputBorder(
               borderSide: BorderSide(color: Colors.black,style: BorderStyle.solid,width: 2)
           ),*/
           border: InputBorder.none,
@@ -303,7 +304,7 @@ class _BodyState extends State<Body> {
       InkWell(
         onTap: () => Navigator.pushNamed(context, '/'),
         child: Container(
-          height: screenHeightPercentage(context,percentage: 0.125),
+          height: screenHeightPercentage(context, percentage: 0.125),
           padding: const EdgeInsets.fromLTRB(25, 5, 25, 0),
           child: Text(
             '${UserPreferences.myUser.about}',
@@ -334,6 +335,4 @@ class _BodyState extends State<Body> {
       // child: SettingsScreen(),
     );
   }
-
-
 }

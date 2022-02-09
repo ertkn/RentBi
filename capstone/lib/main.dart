@@ -6,19 +6,23 @@ import 'package:capstone/screens/sign_in/sign_in_screen.dart';
 import 'package:capstone/screens/sign_up/sign_up_screen.dart';
 import 'package:capstone/screens/sign_up_post/sign_up_post.dart';
 */
-import 'package:capstone/screens/profile/profilenew.dart';
+import 'package:capstone/screens/home/user_settings/profile/profilenew.dart';
+import 'package:capstone/screens/wrapper.dart';
 import 'package:capstone/utilities/theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-import 'screens/home/home_screen.dart';
-import 'screens/profile/profile.dart';
-import 'screens/user_settings/user_settings_screen.dart';
+import 'screens/home/product/home_screen.dart';
+import 'screens/home/user_settings/profile/profile.dart';
+import 'screens/home/user_settings/user_settings_screen.dart';
 import 'screens/settings/settings.dart';
-import 'screens/sign_in/sign_in_screen.dart';
-import 'screens/sign_up/sign_up_screen.dart';
-import 'screens/sign_up_post/sign_up_post.dart';
+import 'screens/authentication/sign_in/sign_in_screen.dart';
+import 'screens/authentication/sign_up/sign_up_screen.dart';
+import 'screens/authentication/sign_up_post/sign_up_post.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
   // runApp(ExpansionTileSample());
 }
@@ -38,9 +42,10 @@ class MyApp extends StatelessWidget {
       //home: const MyHomePage(title: 'RentBi'),
       // home: LoginScreen(),
       theme: theme(),
-      initialRoute: '/profilenew',
+      initialRoute: '/login',
       routes: {
-        '/' : (context) => const LoginScreen(),
+        '/' : (context) => const Wrapper(),
+        '/login' : (context) => const LoginScreen(),
         // '/home' : (context) => HomeScreen(),
         '/home' : (context) => const HomeScreen(),
         '/signup' : (contex) => const SignupScreen(),

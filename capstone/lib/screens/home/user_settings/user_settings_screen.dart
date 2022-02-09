@@ -1,4 +1,4 @@
-import 'package:capstone/screens/user_settings/widgets/body.dart';
+import 'package:capstone/screens/home/user_settings/widgets/body.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +36,7 @@ class _UserSettingsScreenState extends State<UserSettingsScreen> {
       toolbarHeight: screenHeightPercentage(context,percentage: 0.07),
       // toolbarHeight: 65,
       foregroundColor: Colors.transparent,
-      backgroundColor: Color(0xFFB6CFEC),
+      backgroundColor: const Color(0xFFB6CFEC),
       primary: true,
       elevation: 0,
       // centerTitle: true,

@@ -88,7 +88,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
               onSaved: (newValue) {
                 setState(() {
-                  UserPreferences.myUser.password = newValue;
+                  UserPreferences.newUser.password = newValue;
                 });
               },
               validator: (password) => password != null && password.length < 5 ? 'Enter min. 5 characters' : null,
@@ -144,13 +144,15 @@ class _SignUpFormState extends State<SignUpForm> {
 
               controller: emailController,
 
+/*
               onChanged: (value) {
-/*                if (emailValidatorRegExp.hasMatch(value)) {
+                if (emailValidatorRegExp.hasMatch(value)) {
                   setState(() {
                     random = Random().nextInt(100 - 15);
                   });
                   print('onChange' + '---' + '$random');
-                }*/
+                }
+
 
                 if (EmailValidator.validate(value)) {
                   setState(() {
@@ -158,11 +160,12 @@ class _SignUpFormState extends State<SignUpForm> {
                   });
                 }
               },
+*/
 
               // onSaved: (newValue) => myUser.email = email,
               onSaved: (newValue) {
                 setState(() {
-                  UserPreferences.myUser.email = newValue;
+                  UserPreferences.newUser.email = newValue;
                 });
               },
               validator: (email) =>
@@ -225,7 +228,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
               onSaved: (newValue) {
                 setState(() {
-                  UserPreferences.myUser.firstName = newValue;
+                  UserPreferences.newUser.firstName = newValue;
                 });
               },
 
@@ -281,7 +284,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
               onSaved: (newValue) {
                 setState(() {
-                  UserPreferences.myUser.lastName = newValue;
+                  UserPreferences.newUser.lastName = newValue;
                 });
               },
 
@@ -387,10 +390,10 @@ class _SignUpFormState extends State<SignUpForm> {
       form.save();
       // final email = emailController.selection.;
       // print(controller.text + '---' + controller.text + '\n');
-      print('First Name: ' +'${UserPreferences.myUser.firstName}' +
-          '\nLast Name: ' +'${UserPreferences.myUser.lastName}' +
-          '\nEmail: ' +'${UserPreferences.myUser.email}'+
-          '\nPassword: '+'${UserPreferences.myUser.password}');
+      print('First Name: ' +'${UserPreferences.newUser.firstName}' +
+          '\nLast Name: ' +'${UserPreferences.newUser.lastName}' +
+          '\nEmail: ' +'${UserPreferences.newUser.email}'+
+          '\nPassword: '+'${UserPreferences.newUser.password}');
 
       Navigator.pushNamed(context, '/signuppost');
       // print('${emailController.text}');

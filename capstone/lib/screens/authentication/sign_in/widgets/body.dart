@@ -1,4 +1,4 @@
-import 'package:capstone/screens/sign_in/widgets/sign_in_form.dart';
+import 'package:capstone/screens/authentication/sign_in/widgets/sign_in_form.dart';
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';

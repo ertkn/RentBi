@@ -1,4 +1,4 @@
-import 'package:capstone/screens/sign_up_post/widgets/sing_up_post_form.dart';
+import 'package:capstone/screens/authentication/sign_up_post/widgets/sing_up_post_form.dart';
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +18,9 @@ class Body extends StatelessWidget {
           child: SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: EdgeInsets.fromLTRB(
-              screenWidthPercentage(context, percentage: 0.1),
+              screenWidthPercentage(context, percentage: 0.085),
               screenHeightPercentage(context, percentage: 0.075),
-              screenWidthPercentage(context, percentage: 0.1),
+              screenWidthPercentage(context, percentage: 0.085),
               screenHeightPercentage(context, percentage: 0.05),
             ),
             child: Column(

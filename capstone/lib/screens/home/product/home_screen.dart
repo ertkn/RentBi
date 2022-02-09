@@ -1,4 +1,5 @@
-import 'package:capstone/screens/home/widgets/body.dart';
+import 'package:capstone/screens/home/product/widgets/searchBar.dart';
+import 'package:capstone/screens/home/product//widgets/body.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
 import 'package:flutter/material.dart';
@@ -38,19 +39,21 @@ class HomeScreen extends StatelessWidget {
         onPressed: () => Navigator.pop(context),
       ),
 
-      title: SizedBox(
+      /*title: SizedBox(
         // color: Colors.indigoAccent,
         height: screenHeightPercentage(context, percentage: 0.045),
         width: screenWidthPercentage(context, percentage: 0.65),
         // margin: const EdgeInsets.fromLTRB(0, 19.25, 0, 0),
         // decoration: kBoxDecorationStyle,
         // padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
-        child: TextField(
+        child: TextFormField(
+          controller: controller,
           cursorColor: Colors.black12,
           textAlign: TextAlign.left,
-          textAlignVertical: TextAlignVertical.bottom,
+          textAlignVertical: TextAlignVertical.center,
           // controller: controller,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 0),
             // fillColor: Colors.indigoAccent,
             // filled: true,
             // isDense: true,
@@ -65,6 +68,7 @@ class HomeScreen extends StatelessWidget {
               minHeight: 0,
               minWidth: 0,
             ),
+
             prefixIcon: IconButton(
               icon: const Icon(
                 Icons.search,
@@ -75,6 +79,7 @@ class HomeScreen extends StatelessWidget {
             ),
             suffixIcon: IconButton(
               onPressed: () => print('closed'),
+              // onPressed: () => controller.clear(),
               icon: const Icon(Icons.close),
               tooltip: 'delete',
               color: Colors.black26,
@@ -88,7 +93,8 @@ class HomeScreen extends StatelessWidget {
             // border: OutlineInputBorder(),
           ),
         ),
-      ),
+      ),*/
+      title: const SearchBar(),
 
       actions: [
         IconButton(

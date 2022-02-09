@@ -1,15 +1,21 @@
-import 'package:capstone/screens/profile/widgets/Body.dart';
+import 'package:capstone/screens/home/user_settings/profile/widgets/Body.dart';
 import 'package:capstone/utilities/constants.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreenNew extends StatelessWidget {
+class ProfileScreenNew extends StatefulWidget {
   const ProfileScreenNew({Key? key}) : super(key: key);
 
   @override
+  State<ProfileScreenNew> createState() => _ProfileScreenNewState();
+}
+
+class _ProfileScreenNewState extends State<ProfileScreenNew> {
+  @override
   Widget build(BuildContext context) {
-    bool _enabled = false;
+    // bool _enabled = false;
+    // List<IconData> iconData = [Icons.edit_outlined,Icons.save_outlined];
 
     return Scaffold(
       body: GestureDetector(
@@ -70,15 +76,22 @@ class ProfileScreenNew extends StatelessWidget {
                   color: Colors.white,
                   // iconSize: screenWidthPercentage(context, percentage: 0.1),
                   // onPressed: () => Navigator.pop(context),
-                  onPressed: () => Navigator.pushNamed(context, '/'),
+                  // onPressed: () => Navigator.pushNamed(context, '/'),
+                  onPressed: () {
+/*                    setState(() {
+                      _enabled = _enabled ? false : true;
+                    });*/
+                  },
                   icon: const Icon(
-                    Icons.edit_outlined,
+                     Icons.edit,
+                    // iconData[_e],
                     size: 30,
                   ),
                 ),
               ],
             ),
-            const Body(),
+            Body(),
+            // Body(isEdit: _enabled,),
             /*SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => profileLabels[index],

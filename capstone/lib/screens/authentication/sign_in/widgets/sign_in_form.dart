@@ -1,11 +1,14 @@
-import 'package:capstone/models/user.dart';
-import 'package:capstone/screens/sign_up/sign_up_screen.dart';
+import 'package:capstone/models/user.dart' as u;
+import 'package:capstone/screens/authentication/sign_up/sign_up_screen.dart';
 import 'package:capstone/utilities/constants.dart';
+import 'package:capstone/utilities/snackbar.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
 import 'package:capstone/widgets/loginButton.dart';
 import 'package:capstone/widgets/text_field_container.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class SignInForm extends StatefulWidget {
@@ -16,21 +19,24 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
-  User newUser = UserPreferences.myUser;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  // u.User newUser = UserPreferences.myUser;
   bool? _rememberMe = false;
   String? email;
   bool isHidden = true;
+  bool isValidate = false;
+  bool val = false;
 
   // final passwordController = TextEditingController();
   // final emailController = TextEditingController();
-  final controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
     // passwordController.dispose();
     // emailController.dispose();
-    controller.dispose();
+    _controller.dispose();
     super.dispose();
   }
 
@@ -44,12 +50,15 @@ class _SignInFormState extends State<SignInForm> {
           verticalSpaceSmall,
           buildPasswordTextField(),
           verticalSpaceTiny,
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: <Widget>[
-            buildRememberMeCheckbox(),
-            buildForgotPasswordBtn(),
-          ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              buildRememberMeCheckbox(),
+              buildForgotPasswordBtn(),
+            ],
+          ),
           verticalSpaceTiny,
-          buildLoginBtn(),
+          buildLoginButton(),
           verticalSpaceRegular,
           buildSignupBtn(),
         ],
@@ -76,32 +85,34 @@ class _SignInFormState extends State<SignInForm> {
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
 
-              controller: controller,
+              controller: _controller,
 
-              onChanged: (value) {
-/*                if (emailValidatorRegExp.hasMatch(value)) {
+/*              onChanged: (value) {
+                if (emailValidatorRegExp.hasMatch(value)) {
                   setState(() {
                     random = Random().nextInt(100 - 15);
                   });
                   print('onChange' + '---' + '$random');
-                }*/
+                }
 
-                if(EmailValidator.validate(value)){
+                if (EmailValidator.validate(value)) {
                   setState(() {
                     // newUser.email = value;
                   });
                 }
-              },
+              },*/
 
               // onSaved: (newValue) => myUser.email = email,
               onSaved: (newValue) {
                 setState(() {
-                  newUser.email = newValue;
+                  // newUser.email = newValue;
                   UserPreferences.myUser.email = newValue;
                 });
               },
               validator: (email) =>
-                  email != null && !EmailValidator.validate(email) ? 'Enter a valid email' : null,
+                  email != null && !EmailValidator.validate(email)
+                      ? 'Enter a valid email'
+                      : null,
 
               decoration: InputDecoration(
                 hintText: 'Enter your Email',
@@ -116,7 +127,7 @@ class _SignInFormState extends State<SignInForm> {
                     Icons.close,
                     color: Colors.white54,
                   ),
-                  onPressed: () => controller.clear(),
+                  onPressed: () => _controller.clear(),
                 ),
 /*              suffixIcon: widget.controller.text.isEmpty
                 ? Container(width: 0)
@@ -196,7 +207,7 @@ class _SignInFormState extends State<SignInForm> {
 
               onSaved: (newValue) {
                 setState(() {
-                  newUser.password = newValue;
+                  // newUser.password = newValue;
                   UserPreferences.myUser.password = newValue;
                 });
               },
@@ -207,7 +218,9 @@ class _SignInFormState extends State<SignInForm> {
               // controller: widget.controller,
               // maxLength: 24,
 
-              validator: (password) => password != null && password.length < 5 ? 'Enter min. 5 characters' : null,
+              validator: (password) => password != null && password.length < 8
+                  ? 'Enter min. 5 characters'
+                  : null,
 
               decoration: InputDecoration(
                 // floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -287,14 +300,128 @@ class _SignInFormState extends State<SignInForm> {
     );
   }
 
+/*
   Widget buildLoginBtn() {
     return LoginButton(
       buttonText: 'LOGIN',
       onPressedFunction: validFunction,
     );
   }
+*/
 
-  void validFunction() {
+  Container buildLoginButton() {
+    return Container(
+      // padding: const EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: elvButtonStyle,
+        /*onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        ),*/
+        onPressed: () async {
+          final form = formKey.currentState!;
+          if (form.validate()) {
+            form.save();
+            // validFunction();
+/*             val = (await buildDialog())!;
+            if(val == true){
+              print('goes to registered');
+              await _registerWithEmailNPassword();
+            }*/
+            buildDialog().then((_) {
+              if(isValidate == true){
+                print('goes to registered');
+                _registerWithEmailNPassword();
+              }
+            });
+            print('out to registered: ${isValidate}');
+            // print('BuildDialog: ${buildDialog()}');
+            // _registerWithEmailNPassword();
+          }
+        },
+        // onPressed: () => print('Login Button Pressed'),
+        child: const Text(
+          'Sign Up',
+          style: buttonTextStyle,
+        ),
+      ),
+    );
+  }
+
+  buildDialog() async {
+    await showDialog<bool>(
+      context: context,
+      builder: (context) => buildAlertDialog(),
+      barrierDismissible: false,
+    );
+  }
+
+  AlertDialog buildAlertDialog() {
+    return AlertDialog(
+      content: Text('Do you validate this records'),
+      title: const Text('Confirm'),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  isValidate = true;
+                  Navigator.of(context).pop(isValidate);
+                });
+              },
+              child: const Text('YES'),
+            ),
+            TextButton(
+              onPressed: () {
+                isValidate = false;
+                Navigator.of(context).pop(isValidate);
+              },
+              child: const Text('NO'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Future _registerWithEmailNPassword() async {
+    try {
+      final UserCredential userCredential =
+      await _auth.createUserWithEmailAndPassword(
+        email: UserPreferences.myUser.email!,
+        password: UserPreferences.myUser.password!,
+      );
+      final User user = userCredential.user!;
+
+      if (user != null) {
+        setState(() {
+          SnackBarMessage.showSnackBar(context,
+              text: 'Register accomplished\n\n'
+                  '${UserPreferences.myUser.firstName} '
+                  '${UserPreferences.myUser.lastName}');
+          Navigator.pushReplacementNamed(context, '/home');
+        });
+      } else {
+        setState(() {
+          SnackBarMessage.showSnackBar(context,
+              text: 'register, it seems failed..');
+        });
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      setState(() {
+        SnackBarMessage.showSnackBar(context,
+            text: 'ouch!! register is failed!\n\n$e');
+      });
+    }
+  }
+
+/*  void validFunction() {
     final form = formKey.currentState!;
 
     if (form.validate()) {
@@ -302,23 +429,36 @@ class _SignInFormState extends State<SignInForm> {
       form.save();
       // final email = emailController.selection.;
       // print(controller.text + '---' + controller.text + '\n');
-      print('First Name: ' +'${UserPreferences.myUser.firstName}' +
-          '\nLast Name: ' +'${UserPreferences.myUser.lastName}' +
-          '\nEmail: ' +'${UserPreferences.myUser.email}'+
-          '\nPassword: '+'${UserPreferences.myUser.password}');
 
-      Navigator.pushNamed(context, '/home');
-      /*ScaffoldMessenger.of(context)
+      _loginUser();
+
+      print('First Name: ' +
+          '${UserPreferences.myUser.firstName}' +
+          '\nLast Name: ' +
+          '${UserPreferences.myUser.lastName}' +
+          '\nEmail: ' +
+          '${UserPreferences.myUser.email}' +
+          '\nPassword: ' +
+          '${UserPreferences.myUser.password}');
+
+      Navigator.pushReplacementNamed(context, '/home');
+      *//*ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(
           content: Text('Your email is $email'),
-        ));*/
+        ));*//*
     }
   }
 
+  _loginUser() async {
+    (await _auth);
+
+  }*/
+
   Widget buildSignupBtn() {
     return GestureDetector(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => SignupScreen())),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const SignupScreen())),
       // onTap: () => print('routed to Sign-up page'),
       child: RichText(
         text: const TextSpan(

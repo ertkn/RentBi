@@ -1,9 +1,11 @@
 import 'package:capstone/models/categories.dart';
 import 'package:capstone/utilities/constants.dart';
+import 'package:capstone/utilities/snackbar.dart';
 import 'package:capstone/utilities/spacing.dart';
 import 'package:capstone/utilities/user_preferences.dart';
 import 'package:capstone/widgets/loginButton.dart';
 import 'package:capstone/widgets/text_field_container.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -15,6 +17,9 @@ class SignUpPostForm extends StatefulWidget {
 }
 
 class _SignUpPostFormState extends State<SignUpPostForm> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
   // FocusNode focusNodePhone = FocusNode();
   FocusNode focusNodeAddress = FocusNode();
   final phoneNumberController = TextEditingController();
@@ -42,7 +47,7 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
   // String selectedDistrictItem = data[0].children![0].sublocation![0].toString();
 
   List<bool> isDisableDropDown = [true, true];
-
+  bool isValidate = false;
   // List<List<String>> location_list = [{'istanbul':['pendik']}];
   //[{'istanbul':[{'pendik'}]}]
   @override
@@ -74,17 +79,27 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
         children: <Widget>[
           buildPhoneNoFormText(context),
           // verticalSpaceMedium,
-          Row(
-            children: [
-              buildCountryDropdownButton(),
-              horizontalSpaceSmall,
-              buildCityDropdownButton(),
-              horizontalSpaceSmall,
-              buildDistrictDropdownButton(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Text(
+                'Location',
+                style: labelStyle,
+              ),
+              verticalSpaceTiny,
+              Row(
+                children: [
+                  buildCountryDropdownButton(),
+                  horizontalSpaceSmall,
+                  buildCityDropdownButton(),
+                  horizontalSpaceSmall,
+                  buildDistrictDropdownButton(),
+                ],
+              ),
             ],
           ),
           // verticalSpaceRegular,
-          verticalSpaceMedium,
+          verticalSpaceSmall,
           buildAddressFormText(context),
           verticalSpaceMedium,
           buildLoginButton(),
@@ -94,8 +109,16 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
     );
   }
 
-  Container buildAddressFormText(BuildContext context) {
-    return Container(
+  Column buildAddressFormText(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Text(
+          'Address',
+          style: labelStyle,
+        ),
+        verticalSpaceTiny,
+        Container(
           decoration: boxDecorationStyle.copyWith(
             shape: BoxShape.rectangle,
             color: const Color(0xBE385C89),
@@ -116,13 +139,12 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
             // maxLines: 5,
             maxLength: 200,
 
-
             // onEditingComplete: ,
             //   r"^[a-z ,.'-]+$"
 /*
-            inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9-.,/ ]+( [a-zA-Z0-9_]+)*')),
-            ],
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9-.,/ ]+( [a-zA-Z0-9_]+)*')),
+                ],
 */
 
             onFieldSubmitted: (_) => FocusScope.of(context).unfocus(),
@@ -131,12 +153,13 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
               setState(
                 () {
                   // int phoneInt = int.parse(newValue!),
-                  UserPreferences.myUser.address = address;
+                  UserPreferences.newUser.address = address;
                 },
               );
             },
 
-            validator: (text) => text != null && text.isEmpty ? 'enter your address' : null,
+            validator: (text) =>
+                text != null && text.isEmpty ? 'enter your address' : null,
 
             decoration: InputDecoration(
               // floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -144,20 +167,20 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
               hintStyle: hintTextStyle,
 
               /*hintStyle: const TextStyle(
-                color: Colors.white54,
-                fontWeight: FontWeight.w600,
-                fontSize: 16,
-              ),*/
+                    color: Colors.white54,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                  ),*/
               contentPadding: const EdgeInsets.only(top: 42.5),
 
               border: InputBorder.none,
               /*border: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.amber,
-                      style: BorderStyle.solid,
-                      width: 3,
-                  ),
-              ),*/
+                      borderSide: BorderSide(
+                          color: Colors.amber,
+                          style: BorderStyle.solid,
+                          width: 3,
+                      ),
+                  ),*/
               // contentPadding: EdgeInsets.only(top: 10.0),
               prefixIcon: const Icon(
                 Icons.home,
@@ -173,7 +196,9 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
               ),
             ),
           ),
-        );
+        ),
+      ],
+    );
   }
 
   Container buildDistrictDropdownButton() {
@@ -237,7 +262,7 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
                   // int phoneInt = int.parse(newValue!),
                   print('District: ' + district.toString());
                   // UserPreferences.myUser.addressCountry = newValue.toString();
-                  UserPreferences.myUser.addressDistrict = district.toString();
+                  UserPreferences.newUser.addressDistrict = district.toString();
                 },
               );
             },
@@ -251,9 +276,11 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
                 });
               }
             },
-
             validator: (location) =>
-               location != null && isDisableDropDown[1] == true || selectedDistrictItemNotNull != selectedDistrictItem ? 'select a location' : null,
+                location != null && isDisableDropDown[1] == true ||
+                        selectedDistrictItemNotNull != selectedDistrictItem
+                    ? 'select a location'
+                    : null,
 
 /*
             validator: (value) {
@@ -378,16 +405,16 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
                 // int phoneInt = int.parse(newValue!),
                 print('City: ' + city.toString());
                 // UserPreferences.myUser.addressCountry = newValue.toString();
-                UserPreferences.myUser.addressCity = city.toString();
+                UserPreferences.newUser.addressCity = city.toString();
               },
             );
           },
 
           validator: (value) {
-            if(value!=null && isDisableDropDown[1]==true || selectedCityItem != selectedCityItemNotNull){
+            if (value != null && isDisableDropDown[1] == true ||
+                selectedCityItem != selectedCityItemNotNull) {
               return 'select your city';
-            }
-            else {
+            } else {
               null;
             }
           },
@@ -481,7 +508,10 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
               // itemLocation = Locations();
               selectedCountryItem = value.toString();
               selectedCountryItemNotNull = selectedCountryItem!;
-              print('selectedCountryItem: '+selectedCountryItem.toString()+' |Value: '+value.toString());
+              print('selectedCountryItem: ' +
+                  selectedCountryItem.toString() +
+                  ' |Value: ' +
+                  value.toString());
               // print('selectedCountryItemNotNull: ' + selectedCountryItemNotNull);
             });
           },
@@ -492,16 +522,16 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
                 // int phoneInt = int.parse(newValue!),
                 print('Country: ' + country.toString());
                 // UserPreferences.myUser.addressCountry = newValue.toString();
-                UserPreferences.myUser.addressCountry = country.toString();
+                UserPreferences.newUser.addressCountry = country.toString();
               },
             );
           },
 
           validator: (value) {
-            if(value!=null && isDisableDropDown[0]==true || selectedCountryItem != selectedCountryItemNotNull){
+            if (value != null && isDisableDropDown[0] == true ||
+                selectedCountryItem != selectedCountryItemNotNull) {
               return 'select your country';
-            }
-            else {
+            } else {
               null;
             }
           },
@@ -546,9 +576,9 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
     return InputDecoration(
         // prefixIcon: const Icon(Icons.location_city, color: Colors.white),
         constraints: BoxConstraints(
-          maxWidth: screenWidthPercentage(context, percentage: 0.6),
-          minWidth: screenWidthPercentage(context, percentage: 0.3),
-        )
+      maxWidth: screenWidthPercentage(context, percentage: 0.6),
+      minWidth: screenWidthPercentage(context, percentage: 0.3),
+    )
 
         // border: OutlineInputBorder(
         //   borderRadius: BorderRadius.all(Radius.circular(25) ),
@@ -571,7 +601,9 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
       // print('selectedCountryItemNotNull:' + selectedCountryItemNotNull.toString());
       // print('item.location:' +item.location.toString());
       // print('IN/itemLocation:' +itemLocation.location.toString());
-      if (item.location.toString().contains(selectedCountryItemNotNull.toString()) &&
+      if (item.location
+              .toString()
+              .contains(selectedCountryItemNotNull.toString()) &&
           selectedCountryItem != null) {
         // if(selectedCountryItemNotNull == ''){
         //   itemLocation = item;
@@ -601,7 +633,10 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
       // print('item.location:' +item.location.toString());
       // print('IN/itemLocation:' +itemLocation.location.toString());
       // print('selectedCityItem.toString(): ' + selectedCityItem.toString());
-      if (outter.location.toString().contains(selectedCountryItemNotNull.toString()) && selectedCityItem != null) {
+      if (outter.location
+              .toString()
+              .contains(selectedCountryItemNotNull.toString()) &&
+          selectedCityItem != null) {
         // if(selectedCountryItemNotNull == ''){
         //   itemLocation = item;
         //   print('returnDistrictIndexOf (inner): /itemLocationCity: => ' +itemLocationCity.location.toString());
@@ -613,7 +648,10 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
         // print('item.location.toString(): ' + item.location.toString());
         // print('selectedCountryItem.toString(): ' + selectedCountryItemNotNull.toString());
         outter.children?.map((inner) {
-          if (inner.location.toString().contains(selectedCityItemNotNull.toString()) && selectedCityItem != null) {
+          if (inner.location
+                  .toString()
+                  .contains(selectedCityItemNotNull.toString()) &&
+              selectedCityItem != null) {
             // print('selectedCityItemNotNull.toString(): ' + selectedCityItemNotNull.toString());
             itemLocationCity = inner;
             // print('returnDistrictIndexOf (inner in): /itemLocationCity: => ' +itemLocationCity.location.toString());
@@ -632,39 +670,151 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
     return itemLocationCity;
   }
 
-  LoginButton buildLoginButton() {
+/*  LoginButton buildLoginButton() {
     return LoginButton(
       buttonText: 'Sign Up',
       onPressedFunction: validFunction,
     );
+  }*/
+
+  Container buildLoginButton() {
+    return Container(
+      // padding: const EdgeInsets.symmetric(vertical: 25.0),
+      width: double.infinity,
+      child: ElevatedButton(
+        style: elvButtonStyle,
+        /*onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomeScreen(),
+          ),
+        ),*/
+        onPressed: () async {
+          final form = formKey.currentState!;
+          if (form.validate()) {
+            form.save();
+            // validFunction();
+/*            if(await buildDialog() == true){
+              print('goes to registered');
+              _registerWithEmailNPassword();
+            }*/
+            buildDialog().then((_) {
+              if(isValidate == true){
+                print('goes to registered');
+                _registerWithEmailNPassword();
+              }
+            });
+          // _registerWithEmailNPassword();
+            print('out to registered: ${isValidate}');
+          }
+        },
+        // onPressed: () => print('Login Button Pressed'),
+        child: const Text(
+          'Sign Up',
+          style: buttonTextStyle,
+        ),
+      ),
+    );
   }
 
-  void validFunction() {
+/*  void validFunction() async {
     final form = formKey.currentState!;
 
     if (form.validate()) {
+      await buildDialog();
       // final emails = emailController.text;
       form.save();
+      _registerWithEmailNPassword();
 
       print('Phone Number: ' +
-          '${UserPreferences.myUser.phoneNumber}' +
+          '${UserPreferences.newUser.phoneNumber}' +
           '\nDistrict: ' +
-          '${UserPreferences.myUser.addressDistrict}' +
+          '${UserPreferences.newUser.addressDistrict}' +
           '\nCity: ' +
-          '${UserPreferences.myUser.addressCity}' +
+          '${UserPreferences.newUser.addressCity}' +
           '\nCountry: ' +
-          '${UserPreferences.myUser.addressCountry}' +
+          '${UserPreferences.newUser.addressCountry}' +
           '\nAddress: ' +
-          '${UserPreferences.myUser.address}');
+          '${UserPreferences.newUser.address}');
 
       Navigator.pushNamed(context, '/home');
       // print('${emailController.text}');
-      /*ScaffoldMessenger.of(context)
+      *//*ScaffoldMessenger.of(context)
         ..removeCurrentSnackBar()
         ..showSnackBar(SnackBar(
           content: Text('Your email is $email'),
-        ));*/
+        ));*//*
 
+    }
+  }*/
+
+  buildDialog() async {
+    await showDialog<bool>(
+      context: context,
+      builder: (context) => buildAlertDialog(),
+      barrierDismissible: false,
+    );
+  }
+
+  AlertDialog buildAlertDialog() {
+    return AlertDialog(
+      content: Text('Do you validate this records'),
+      title: const Text('Confirm'),
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: <Widget>[
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  isValidate = true;
+                  Navigator.of(context).pop(isValidate);
+                });
+              },
+              child: const Text('YES'),
+            ),
+            TextButton(
+              onPressed: () {
+                isValidate = false;
+                Navigator.of(context).pop(isValidate);
+              },
+              child: const Text('NO'),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  void _registerWithEmailNPassword() async {
+    try {
+      final UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: UserPreferences.newUser.email!,
+        password: UserPreferences.newUser.password!,
+      );
+      final User user = userCredential.user!;
+
+      if (user != null) {
+        setState(() {
+          SnackBarMessage.showSnackBar(context,
+              text: 'Register accomplished\n\n}'
+                  '${UserPreferences.newUser.firstName}'
+                  '${UserPreferences.newUser.lastName}');
+          Navigator.pushReplacementNamed(context, '/home');
+        });
+      } else {
+        setState(() {
+          SnackBarMessage.showSnackBar(context,
+              text: 'register, it seems failed..');
+        });
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      setState(() {
+        SnackBarMessage.showSnackBar(context,
+            text: 'ouch!! register is failed!\n\n$e');
+      });
     }
   }
 
@@ -672,7 +822,10 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        const Text('Phone No'),
+        const Text(
+          'Phone No',
+          style: labelStyle,
+        ),
         verticalSpaceTiny,
         Stack(
           children: [
@@ -690,17 +843,19 @@ class _SignUpPostFormState extends State<SignUpPostForm> {
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
               ],
 
-              onFieldSubmitted: (_) => FocusScope.of(context).requestFocus(focusNodeAddress),
+              onFieldSubmitted: (_) =>
+                  FocusScope.of(context).requestFocus(focusNodeAddress),
 
               onSaved: (newValue) {
                 setState(
                   () {
                     // int phoneInt = int.parse(newValue!),
-                    UserPreferences.myUser.phoneNumber = int.parse(newValue!);
+                    UserPreferences.newUser.phoneNumber = int.parse(newValue!);
                   },
                 );
               },
-              validator: (val) => val != null && val.length != 11 ? 'Enter 11 digit' : null,
+              validator: (val) =>
+                  val != null && val.length != 11 ? 'Enter 11 digit' : null,
               decoration: InputDecoration(
                 // floatingLabelBehavior: FloatingLabelBehavior.always,
                 hintText: 'Enter your Phone Number',
